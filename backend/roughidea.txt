@@ -1,0 +1,5 @@
+users can post their experience.
+they can like, comment it.
+they are associated with unique login user id.
+each user data should to handled properly.
+liked and commented stuff should be visible to every other user
