@@ -54,9 +54,9 @@ const Signup = () => {
   }
   return (
     <div className="container">
-      <form className='margin-top-all'>
+      <form className='margin-top-all form-control-sm'>
 
-      <h1 className='my-3'>Create An Account on Travel Log</h1>
+      <h1 className='fs-2 mb-5'>Create An Account on Travel Log</h1>
 
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Full Name</label>
@@ -84,7 +84,7 @@ const Signup = () => {
           <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
         </div>
 
-        <button type="submit" disabled={data.name.length && data.email.length && data.password.length && data.cpassword.length > 0 ? false : true} className="btn btn-primary" onClick={handleSignup}>Create Account</button>
+        <button type="submit" disabled={data.name.length && data.email.length && data.password.length && data.cpassword.length > 0 ? false : true} className="btn btn-primary btn-sm" onClick={handleSignup}>Create Account</button>
       </form>
     </div>
   )

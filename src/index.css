@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Outfit&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -19,7 +21,6 @@ code {
   background-size: cover;
   width: 100%;
   height: 100vh; */
-  background-color: cadetblue;
 } 
 nav{
   transition: ease-out .5s;
@@ -34,9 +35,15 @@ nav{
   height: 100vh;
 }
 
+.banner-text-heading{
+  font-family: "Oswald", sans-serif;
+  font-size: 60px;
+  
+}
+
 .banner-left-text{
-  padding: 100px;
-  /* width: 40%; */
+  font-family: "Open Sans", sans-serif;
+  font-size: 19px;
   text-align: justify;
 }
 
@@ -46,7 +53,7 @@ nav{
 
 .banner-right-image img{
   width: 100%;
-  max-width: 500px;
+  max-width: 570px;
   height: auto;
   border-radius: 30px;
 }

@@ -44,8 +44,8 @@ const Login = () => {
 
   return (
     <div className='container'>
-      <form className='margin-top-all'>
-        <h1 className='my-3'>Login to Travel Log</h1>
+      <form className='margin-top-all form-control-sm'>
+        <h1 className='my-3 fs-2'>Login to Travel Log</h1>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail1" name='email' onChange={onChange} value={data.email}/>
@@ -59,7 +59,7 @@ const Login = () => {
           <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
             <label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>
         </div>
-        <button type="submit" disabled={data.email.length && data.password.length > 0 ? false : true} className="btn btn-primary" onClick={handleLogin}>Login</button>
+        <button type="submit" disabled={data.email.length && data.password.length > 0 ? false : true} className="btn btn-primary btn-sm" onClick={handleLogin}>Login</button>
       </form>
     </div>
   )

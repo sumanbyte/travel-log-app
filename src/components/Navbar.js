@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert'
 
@@ -36,7 +35,7 @@ const Navbar = () => {
         <>
             <nav className={`navbar navbar-expand-lg fixed-top ${navState}`}>
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Navbar</Link>
+                    <Link className="navbar-brand" to="/">Travel Log</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -64,12 +63,12 @@ const Navbar = () => {
 
                         {
                             !localStorage.getItem('auth-token') ? <>
-                                <Link className="btn btn-primary mx-1" to='/login'>Login</Link>
-                                <Link className="btn btn-success" to='/signup'>Create Account</Link>
+                                <Link className="btn btn-primary mx-1 btn-sm" to='/login'>Login</Link>
+                                <Link className="btn btn-success btn-sm" to='/signup'>Create Account</Link>
                             </>
                                 :
                                 <>
-                                    <button className='btn btn-primary' onClick={handleLogout}>Logout</button>
+                                    <button className='btn btn-primary btn-sm' onClick={handleLogout}>Logout</button>
                                     <Link className='btn btn-success mx-2' to={'/profile'}>Profile</Link>
                                 </>
                         }
