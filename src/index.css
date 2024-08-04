@@ -79,3 +79,13 @@ nav{
   width: 100%;
   margin: 0 auto;
 }
+
+#navbarSupportedContent{
+  margin: 0 20px;
+}
+
+@media screen and (max-width: 991px){
+  #navbarSupportedContent{
+    margin: 20px 0;
+  }
+}
