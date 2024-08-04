@@ -22,7 +22,7 @@ export const Discuss = () => {
 
  
   return (
-    <div className='container margin-top-all'>
+    <div className='container my-4'>
       {/* <h1>app status: {obj.status}</h1> */}
       <div className="mb-3">
         <label htmlFor="title" className="form-label">Title</label>

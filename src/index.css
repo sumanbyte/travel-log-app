@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,4 +60,22 @@ nav{
 
 .margin-top-all{
   margin-top: 100px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.font-open{
+  font-family: "Open Sans", sans-serif;
+}
+
+.font-owsald{
+  font-family: "Oswald", sans-serif;
+}
+
+.max-width-boundary{
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
 }

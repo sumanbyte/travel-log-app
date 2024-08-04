@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate} from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import useAlert from '../hooks/useAlert'
 import Loading from '../assets/loading-component/Loading'
 import jwt_decode from "jwt-decode";
+import { MdOutlineReply } from "react-icons/md";
+
 
 const PostPage = () => {
     const decodedJWT = localStorage.getItem('auth-token') ? jwt_decode(localStorage.getItem('auth-token')) : null
@@ -15,13 +17,13 @@ const PostPage = () => {
         const response = await fetch(`${URL}/api/post/getpost/${postID}`);
         const d = await response.json();
         setPost(d.post)
-        if(!d.post){
+        if (!d.post) {
             navigate('/');
         }
-        
+
     }
 
-    
+
 
     const location = useLocation();
     const postID = location.pathname.split('/')[2];
@@ -91,13 +93,13 @@ const PostPage = () => {
     }
 
 
-    
+
     useEffect(() => {
         getPost(postID);
         getCommentsForAPost(postID)
     }, [])
     return (
-        <div className='mt-5 container'>
+        <div className='mt-5 container font-open'>
             <div className="container-fluid py-5">
                 {post &&
                     <>
@@ -107,7 +109,7 @@ const PostPage = () => {
 
                         </div>
 
-                        <h1 className="display-6 fw-bold">{post && post.title}</h1>
+                        <h1 className="display-6 fw-bold font-owsald">{post && post.title}</h1>
                         <p className="col-md-12 fs-5">{post && post.description}</p>
 
                     </>
@@ -123,7 +125,7 @@ const PostPage = () => {
                 }
 
 
-                <h2 className="display-7 fw-bold mt-5">Leave a comment</h2>
+                <h2 className="display-7 fw-bold mt-5 font-owsald">Leave a comment</h2>
 
                 {
                     localStorage.getItem('auth-token') ?
@@ -146,7 +148,7 @@ const PostPage = () => {
                             <div className="card text-dark">
 
                                 <div className="card-body p-4">
-                                    <h4 className="mb-0">Recent comments</h4>
+                                    <h4 className="mb-0 font-owsald">Recent comments</h4>
                                     <p className="fw-light mb-4 pb-2">Latest Comments section by users</p>
                                     {
                                         !allComments ? <Loading /> :
@@ -156,24 +158,27 @@ const PostPage = () => {
                                                 </>
                                                 :
                                                 allComments.map(comment => {
-                                                    return <div key={comment._id} className="d-flex flex-start mt-4">
+                                                    return <div key={comment._id} className="d-flex flex-start mt-4 font-open">
                                                         <img className="rounded-circle shadow-1-strong me-3"
                                                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
                                                             height="60" />
-                                                        <div>
+                                                        <div style={{ width: "100%" }}>
                                                             <h6 className="fw-bold mb-1">{comment.userName}</h6>
-                                                            <div className="d-flex align-items-center mb-3">
-                                                                <p className="mb-0">
+                                                            <div className="d-flex align-items-center justify-content-between mb-1" style={{ width: "100%" }}>
+                                                                <span className="badge bg-primary" style={{ fontSize: "13px" }}>{comment.userID.name}</span>
+                                                                <p className="mb-0 mx-2" style={{
+                                                                    fontSize: "15px", 
+                                                                }}>
                                                                     March 07, 2021
-                                                                    <span className="badge bg-primary">{comment.userID.name}</span>
                                                                 </p>
-                                                                <a href="#!" className="link-muted"><i className="fas fa-pencil-alt ms-2"></i></a>
-                                                                <a href="#!" className="link-muted"><i className="fas fa-redo-alt ms-2"></i></a>
-                                                                <a href="#!" className="link-muted"><i className="fas fa-heart ms-2"></i></a>
+
                                                             </div>
-                                                            <p className="mb-0">
-                                                                {comment.comment}
-                                                            </p>
+                                                            <div className='d-flex align-items-center'>
+                                                                <p className="mb-0">
+                                                                    {comment.comment}
+                                                                </p>
+                                                                <MdOutlineReply className='cursor-pointer mx-2' size={20} title='Reply' />
+                                                            </div>
                                                         </div>
                                                     </div>
 

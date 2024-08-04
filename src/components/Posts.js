@@ -19,10 +19,10 @@ const Posts = () => {
   }, [])
 
   return (
-    <div className='mt-5 container'>
-      <div className="container-fluid py-5">
-        <h1 className="display-5 fw-bold">View All Posts</h1>
-        <p className="col-md-8 fs-4">You can like, comment other user posts from here.</p>
+    <div className='mt-3 container'>
+      <div className="container-fluid py-3 px-0">
+        <h1 className="display-5 fw-bold font-owsald">View All Posts</h1>
+        <p className="col-md-8 fs-6">You can like, comment other user posts from here.</p>
       </div>
 
 

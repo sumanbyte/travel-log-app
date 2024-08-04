@@ -7,7 +7,7 @@ const Home = () => {
     < >
 
       <div className='img-banner'>
-        <div className="banner-content-wrapper ">
+        <div className="banner-content-wrapper max-width-boundary">
 
           <div className="banner-left-text margin-top-all">
             <h1 className='banner-text-heading '>Travelling Is Great <br />
@@ -33,7 +33,7 @@ const Home = () => {
             </h1>
             <p>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
             <Link type="button" className="btn btn-primary btn-lg" to={'/login'}>Join Us</Link>
-            <button type="button" className="btn btn-outline-dark btn-lg mx-2" to={"/about"}>Learn More</button>
+            <Link type="button" className="btn btn-outline-dark btn-lg mx-2" to={"/about"}>Learn More</Link>
           </div>
 
           <div className="banner-right-image margin-top-all">

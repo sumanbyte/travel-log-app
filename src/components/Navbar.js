@@ -35,14 +35,14 @@ const Navbar = () => {
 
         <>
             <nav className={`navbar navbar-expand-lg`}>
-                <div className="container-fluid">
+                <div className="container-fluid px-5 max-width-boundary">
                     <Link className="navbar-brand" to="/">
                         <img src={NavLogo} alt="navlogo" width={110} height={35} />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="collapse navbar-collapse" style={{margin: "0 20px"}} id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} aria-current="page" to="/">Home</Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
                                 :
                                 <>
                                     <button className='btn btn-primary btn-sm' onClick={handleLogout}>Logout</button>
-                                    <Link className='btn btn-success mx-2' to={'/profile'}>Profile</Link>
+                                    <Link className='btn btn-success mx-2 btn-sm' to={'/profile'}>Profile</Link>
                                 </>
                         }
 
