@@ -142,9 +142,9 @@ const PostPage = () => {
 
 
 
-                <div className="container my-5 py-5">
-                    <div className="row d-flex justify-content-center">
-                        <div className="col-md-12 col-lg-10">
+                <div className="container px-0 my-5 py-5">
+                    <div className="col-md-12">
+                        <div className="col-md-12">
                             <div className="card text-dark">
 
                                 <div className="card-body p-4">
@@ -158,31 +158,33 @@ const PostPage = () => {
                                                 </>
                                                 :
                                                 allComments.map(comment => {
-                                                    return <div key={comment._id} className="d-flex flex-start mt-4 font-open">
-                                                        <img className="rounded-circle shadow-1-strong me-3"
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
-                                                            height="60" />
-                                                        <div style={{ width: "100%" }}>
-                                                            <h6 className="fw-bold mb-1">{comment.userName}</h6>
-                                                            <div className="d-flex align-items-center justify-content-between mb-1" style={{ width: "100%" }}>
-                                                                <span className="badge bg-primary" style={{ fontSize: "13px" }}>{comment.userID.name}</span>
-                                                                <p className="mb-0 mx-2" style={{
-                                                                    fontSize: "15px", 
-                                                                }}>
-                                                                    March 07, 2021
-                                                                </p>
+                                                    return <div key={comment._id} >
+                                                        <hr />
+                                                        <div className="d-flex flex-start mt-4 font-open">
+                                                            <img className="rounded-circle shadow-1-strong me-3"
+                                                                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
+                                                                height="60" />
+                                                            <div style={{ width: "100%" }}>
+                                                                <h6 className="fw-bold mb-1">{comment.userName}</h6>
+                                                                <div className="d-flex align-items-center justify-content-between mb-1" style={{ width: "100%" }}>
+                                                                    <span className="badge bg-primary" style={{ fontSize: "13px" }}>{comment.userID.name}</span>
+                                                                    <p className="mb-0 mx-2" style={{
+                                                                        fontSize: "15px",
+                                                                    }}>
+                                                                        March 07, 2021
+                                                                    </p>
 
-                                                            </div>
-                                                            <div className='d-flex align-items-center'>
-                                                                <p className="mb-0">
-                                                                    {comment.comment}
-                                                                </p>
-                                                                <MdOutlineReply className='cursor-pointer mx-2' size={20} title='Reply' />
+                                                                </div>
+                                                                <div className='d-flex align-items-center'>
+                                                                    <p className="mb-0">
+                                                                        {comment.comment}
+                                                                    </p>
+                                                                    <MdOutlineReply className='cursor-pointer mx-2' size={20} title='Reply' />
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <hr />
                                                     </div>
-
-
 
                                                 })
 

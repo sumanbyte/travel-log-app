@@ -1,6 +1,7 @@
 import React, { useState, } from 'react'
 import {useNavigate} from 'react-router-dom'
-import useAlert from '../hooks/useAlert'
+import useAlert from '../hooks/useAlert';
+import LoginImg from "../assets/img/login.svg";
 
 const Login = () => {
   const [data, setData] = useState({email: '', password: ''})
@@ -43,9 +44,9 @@ const Login = () => {
   }
 
   return (
-    <div className='container'>
-      <form className='margin-top-all form-control-sm'>
-        <h1 className='my-3 fs-2'>Login to Travel Log</h1>
+    <div className='container my-4 d-flex justify-content-between align-items-center'>
+      <form className='form-control-sm col-md-6'>
+        <h1 className='mb-4 fs-2 font-owsald'>Login to Travel Log</h1>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail1" name='email' onChange={onChange} value={data.email}/>
@@ -61,6 +62,8 @@ const Login = () => {
         </div>
         <button type="submit" disabled={data.email.length && data.password.length > 0 ? false : true} className="btn btn-primary btn-sm" onClick={handleLogin}>Login</button>
       </form>
+      <img className='col-md-4' src={LoginImg} alt="Login" width={500} height={500} />
+
     </div>
   )
 }
