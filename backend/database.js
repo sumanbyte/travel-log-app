@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb://localhost:27017/travel-log-users'
+
+const mongoURI = process.env.MONGO_URI;
 
 const connectToMongo = ()=>{
     mongoose.connect(mongoURI, ()=>{

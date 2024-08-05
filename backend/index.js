@@ -1,7 +1,8 @@
 const express = require("express");
 const port = 3000
-const connectToMongo = require("./database");
 var cors = require('cors')
+require("dotenv").config();
+const connectToMongo = require("./database");
 connectToMongo()
 
 const bodyParser = require('body-parser'); // Middleware
@@ -12,6 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(cors())
+
  
 //Login and signup endpoints
 app.use('/api/auth', require('./routes/auth'))
@@ -23,7 +25,3 @@ app.use('/api/editinfo', require('./routes/edit'))
 app.listen(port, ()=>{
     console.log('app listening on port ', port)
 })
-
-
-
-
