@@ -7,8 +7,9 @@ const Posts = () => {
   const { allPosts, allUserPosts } = usePost();
   
   useEffect(() => { 
-    allUserPosts()
-  }, [allUserPosts])
+    allUserPosts();
+        // eslint-disable-next-line
+  }, [])
 
   return (
     <div className='mt-3 container'>

@@ -5,9 +5,9 @@ import usePost from '../hooks/usePost'
 import useAlert from '../hooks/useAlert'
 
 export const Discuss = () => {
-  const {setShow, setAlert} = useAlert()
+  const { setShow, setAlert } = useAlert()
   const [userData, setUserData] = useState({ title: '', description: '' })
-  const {getAllPost, userPosts, loading, createPost} = usePost()
+  const { getAllPost, userPosts, loading, createPost } = usePost()
 
 
   const onChange = (e) => {
@@ -16,11 +16,12 @@ export const Discuss = () => {
   }
 
 
-  useEffect(()=> {
-    getAllPost()
-  }, [getAllPost])
+  useEffect(() => {
+    getAllPost();
+    // eslint-disable-next-line
+  }, [])
 
- 
+
   return (
     <div className='container my-4'>
       {/* <h1>app status: {obj.status}</h1> */}
@@ -34,7 +35,7 @@ export const Discuss = () => {
         <textarea className="form-control" id="description" rows="3" name='description' onChange={onChange} value={userData.description} onKeyDown={(e) => {
           if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
             e.preventDefault()
-            if(userData.title.length > 3 && userData.description.length > 3){
+            if (userData.title.length > 3 && userData.description.length > 3) {
               createPost(userData);
               setShow(true);
               setAlert({
@@ -42,8 +43,8 @@ export const Discuss = () => {
                 type: 'Success',
                 message: "Post Created successfully"
               })
-              setUserData({title: '', description: ''})
-            }else {
+              setUserData({ title: '', description: '' })
+            } else {
               setShow(true);
               setAlert({
                 color: 'danger',
@@ -51,17 +52,17 @@ export const Discuss = () => {
                 message: "Length must be greater than 3"
               })
             }
-        }
+          }
         }}></textarea>
-        <button disabled={userData.title.length > 3 && userData.description.length >3 ? false : true} className="btn btn-primary my-1 text-right" onClick={(e)=> {
+        <button disabled={userData.title.length > 3 && userData.description.length > 3 ? false : true} className="btn btn-primary my-1 text-right" onClick={(e) => {
           createPost(userData)
-          setUserData({title: '', description: ''})
+          setUserData({ title: '', description: '' })
           setShow(true);
-                setAlert({
-                  color: 'success',
-                  type: 'Success',
-                  message: "Post Created successfully"
-                })
+          setAlert({
+            color: 'success',
+            type: 'Success',
+            message: "Post Created successfully"
+          })
         }}>Create Post</button>
       </div>
 
@@ -71,10 +72,10 @@ export const Discuss = () => {
           <div className='text-center'>
             <Loading />
           </div>
-          : userPosts.length <=0 ? "haha you've no posts kid" : 
-          userPosts.map((data) => {
-            return <PostCard key={data._id} data={data}/>
-          })
+          : userPosts.length <= 0 ? "haha you've no posts kid" :
+            userPosts.map((data) => {
+              return <PostCard key={data._id} data={data} />
+            })
         }
       </div>
 

@@ -99,7 +99,8 @@ const PostPage = () => {
     useEffect(() => {
         getPost(postID);
         getCommentsForAPost(postID)
-    }, [getCommentsForAPost, getPost, postID])
+        // eslint-disable-next-line
+    }, [])
     return (
         <div className='mt-5 container font-open'>
             <div className="container-fluid py-5">
