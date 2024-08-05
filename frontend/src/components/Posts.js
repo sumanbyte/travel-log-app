@@ -11,6 +11,9 @@ const Posts = () => {
         // eslint-disable-next-line
   }, [])
 
+  console.log("i am running from Posts component")
+
+
   return (
     <div className='mt-3 container'>
       <div className="container-fluid py-3 px-0">

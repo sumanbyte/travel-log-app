@@ -8,7 +8,7 @@ export const Discuss = () => {
   const { setShow, setAlert } = useAlert()
   const [userData, setUserData] = useState({ title: '', description: '' })
   const { getAllPost, userPosts, loading, createPost } = usePost()
-
+  console.log("I am running from discuss component.");
 
   const onChange = (e) => {
 

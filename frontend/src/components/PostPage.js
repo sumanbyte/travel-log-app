@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useAlert from '../hooks/useAlert'
 import Loading from '../assets/loading-component/Loading'
@@ -8,14 +8,13 @@ import { MdOutlineReply } from "react-icons/md";
 
 const PostPage = () => {
     const decodedJWT = localStorage.getItem('auth-token') ? jwt_decode(localStorage.getItem('auth-token')) : null
-    const URL = process.env.REACT_APP_BACKEND_URL;
     const { setShow, setAlert } = useAlert();
     const [post, setPost] = useState();
     const navigate = useNavigate();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getPost = useCallback(async (postID) => {
-        const response = await fetch(`${URL}/api/post/getpost/${postID}`);
+    const getPost = (async (postID) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getpost/${postID}`);
         const d = await response.json();
         setPost(d.post)
         if (!d.post) {
@@ -35,7 +34,7 @@ const PostPage = () => {
     const commentPost = async (postID, userID) => {
 
         console.log(userID)
-        const response = await fetch(`${URL}/api/post/commentpost/${postID}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/commentpost/${postID}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +63,7 @@ const PostPage = () => {
                 message: 'You need to be logged in to like the post'
             })
         } else {
-            const response = await fetch(`${URL}/api/post/likepost/${postID}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/likepost/${postID}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,8 +87,8 @@ const PostPage = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getCommentsForAPost = useCallback(async (postID) => {
-        const response = await fetch(`${URL}/api/post/getcomments/${postID}`);
+    const getCommentsForAPost = (async (postID) => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getcomments/${postID}`);
         const data = await response.json();
         setAllComments(data);
     })
@@ -101,6 +100,9 @@ const PostPage = () => {
         getCommentsForAPost(postID)
         // eslint-disable-next-line
     }, [])
+
+    console.log("i am running from postpage component")
+
     return (
         <div className='mt-5 container font-open'>
             <div className="container-fluid py-5">

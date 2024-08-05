@@ -31,6 +31,9 @@ const PostCard = (props) => {
     })
   }
 
+  console.log("i am running from postcard component")
+
+
 
   return (
     <div className="card my-2">

@@ -12,7 +12,9 @@ function ProfilePage() {
     getUser();
   
     // eslint-disable-next-line
-  }, [])
+  }, []);
+  console.log("i am running from profilepage component")
+
   return (
     <Card className='my-5' style={{ width: 'fit-content', margin: 'auto' }}>
       {

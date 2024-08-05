@@ -7,7 +7,7 @@ const Signup = () => {
   const {setShow, setAlert} = useAlert()
   const navigate = useNavigate()
   const [data, setData] = useState({ name: '', email: '', password: '', cpassword: '' })
-  const URL = process.env.REACT_APP_BACKEND_URL;
+  console.log("I am running from signup component")
   const handleSignup = async (e) => {
 
     e.preventDefault()
@@ -19,7 +19,7 @@ const Signup = () => {
         message: "Password and Confirm Password Must Match"
       })
     }else {
-      const response = await fetch(`${URL}/api/auth/signup`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`, {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'

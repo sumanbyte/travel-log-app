@@ -1,7 +1,6 @@
 import PostContext from "./postContext";
 import { useState } from "react";
 const PostState = (props)=>{
-    const URL = process.env.REACT_APP_BACKEND_URL;
     let loading = false;
     const [userPosts, setUserPosts] = useState([])
     const [allPosts, setAllPosts] = useState(null)
@@ -9,14 +8,14 @@ const PostState = (props)=>{
 
     const getPost = async (postID) => {
 
-        const response = await fetch(`${URL}/api/post/getpost/${postID}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getpost/${postID}`);
         const d = await response.json();
         setIndividualPost(d.post)    
     }
 
     const getAllPost = async ()=>{
         loading = true
-        const response = await fetch(`${URL}/api/post/getallpost`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getallpost`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +30,7 @@ const PostState = (props)=>{
 
     const createPost = async ({title, description})=> {
         loading = true;
-        const response = await fetch(`${URL}/api/post/createpost`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/createpost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +46,7 @@ const PostState = (props)=>{
     }
 
     const editPost = async (id, title, description)=> {
-        await fetch(`${URL}/api/post/editpost/${id}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/editpost/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +59,7 @@ const PostState = (props)=>{
     }
 
     const deletePost = async (id)=> {
-        await fetch(`${URL}/api/post/deletepost/${id}`, {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/deletepost/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +71,7 @@ const PostState = (props)=>{
     }
 
     const allUserPosts = async () => {
-        const response = await fetch(`${URL}/api/post/allposts`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/allposts`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

@@ -22,7 +22,7 @@ import PostPage from "./components/PostPage";
 
 function App() {
   const { show } = useAlert()
-
+  console.log("i am running from app component")
   return (
 
     <AuthState>

@@ -8,10 +8,11 @@ const Login = () => {
   const {setShow, setAlert} = useAlert()
   const navigate = useNavigate()
 
-  const URL = process.env.REACT_APP_BACKEND_URL;
+  console.log("i am running from login component")
+
   const handleLogin = async (e) => {
     e.preventDefault()
-    const response = await fetch(`${URL}/api/auth/login`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -17,7 +17,10 @@ const Navbar = () => {
         //     setNavState('shadow-5-strong')
         // }
 
-    })
+    });
+
+    console.log("i am running from navbar component")
+
 
     const handleLogout = () => {
         localStorage.removeItem('auth-token');
