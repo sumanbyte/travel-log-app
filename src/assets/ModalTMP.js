@@ -12,7 +12,7 @@ function ModalTMP() {
   const [name, setName] = useState(user.name);
 
   const editUser = async (name) => {
-    const response = await fetch('http://localhost:3000/api/editinfo/edit', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/editinfo/edit`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ import { MdOutlineReply } from "react-icons/md";
 
 const PostPage = () => {
     const decodedJWT = localStorage.getItem('auth-token') ? jwt_decode(localStorage.getItem('auth-token')) : null
-    const URL = 'http://localhost:3000'
+    const URL = process.env.REACT_APP_BACKEND_URL;
     const { setShow, setAlert } = useAlert();
     const [post, setPost] = useState();
     const navigate = useNavigate();

@@ -7,7 +7,7 @@ const Signup = () => {
   const {setShow, setAlert} = useAlert()
   const navigate = useNavigate()
   const [data, setData] = useState({ name: '', email: '', password: '', cpassword: '' })
-  const URL = 'http://localhost:3000'
+  const URL = process.env.REACT_APP_BACKEND_URL;
   const handleSignup = async (e) => {
 
     e.preventDefault()

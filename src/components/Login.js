@@ -8,7 +8,7 @@ const Login = () => {
   const {setShow, setAlert} = useAlert()
   const navigate = useNavigate()
 
-  const URL = 'http://localhost:3000'
+  const URL = process.env.REACT_APP_BACKEND_URL;
   const handleLogin = async (e) => {
     e.preventDefault()
     const response = await fetch(`${URL}/api/auth/login`, {

@@ -1,7 +1,7 @@
 import PostContext from "./postContext";
 import { useEffect, useState } from "react";
 const PostState = (props)=>{
-    const URL = 'http://localhost:3000'
+    const URL = process.env.REACT_APP_BACKEND_URL;
     let loading = false;
     const [userPosts, setUserPosts] = useState([])
     const [allPosts, setAllPosts] = useState(null)
