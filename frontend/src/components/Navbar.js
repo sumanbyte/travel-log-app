@@ -9,15 +9,15 @@ const Navbar = () => {
 
     const { setAlert, setShow } = useAlert();
     // const [navState, setNavState] = useState('shadow-5-strong')
-    window.addEventListener('scroll', () => {
-        // let scroll = window.scrollY > 50
-        // if (scroll) {
-        //     setNavState('bg-light')
-        // } else {
-        //     setNavState('shadow-5-strong')
-        // }
+    // window.addEventListener('scroll', () => {
+    //     let scroll = window.scrollY > 50
+    //     if (scroll) {
+    //         setNavState('bg-light')
+    //     } else {
+    //         setNavState('shadow-5-strong')
+    //     }
 
-    });
+    // });
 
     console.log("i am running from navbar component")
 

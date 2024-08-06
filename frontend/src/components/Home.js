@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { TypeAnimation } from 'react-type-animation';
+// import { TypeAnimation } from 'react-type-animation';
 import BeforeDawn from "../assets/img/before_dawn.svg";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
               <span>WHAT IF ?</span>
               <br />
               <span className="autotype">You could&nbsp;
-                <TypeAnimation
+                {/* <TypeAnimation
                   sequence={[
                     // Same substring at the start will only be typed out once, initially
                     'Share.',
@@ -28,7 +28,7 @@ const Home = () => {
                   speed={50}
                   style={{ display: 'inline-block' }}
                   repeat={Infinity}
-                />
+                /> */}
               </span>
             </h1>
             <p>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
