@@ -1,2 +1,8 @@
-# travel-log-app
-This app consists features like liking the post of a certain user. commenting on a specific post. changing username, login signup. CRUD operation can be performed on a user post by himself/herself. This app uses localstorage and jwt token for authentication mechanism. I have used react js and bootstrap for the frontend logic. I have written various backend restful api's and through those rest api this react app communicates with the server. I have used moongose to connect and perform different database queries. By building this app i have learnt so much about how to do authentication, how to communicate with database, state management using react context, populating data based on id on one collection for one to many relationship and other very important things.
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

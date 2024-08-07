@@ -6,6 +6,7 @@ import usePost from '../hooks/usePost';
 const Posts = () => {
   const { allPosts, allUserPosts } = usePost();
   
+  console.log(allPosts);
   useEffect(() => { 
     allUserPosts();
         // eslint-disable-next-line

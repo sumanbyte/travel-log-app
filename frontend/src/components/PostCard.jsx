@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import usePost from '../hooks/usePost';
 import useAlert from '../hooks/useAlert';
 
+
 const PostCard = ({ data }) => {
   const { setShow, setAlert } = useAlert();
   const [editClicked, setEditClicked] = useState(false);

@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import {useState } from 'react'
 import AuthContext from './authContext'
 
 const AuthState = ({ children }) => {
@@ -6,7 +6,7 @@ const AuthState = ({ children }) => {
     
     // currently logged in user for profile page
     const getUser = async ()=> {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/getuser`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/getuser`, {
             method: 'GET',
             headers: {
                 'auth-token': localStorage.getItem('auth-token')

@@ -1,4 +1,3 @@
-import React from 'react'
 import Connect from "../assets/img/connect.svg";
 import Discuss from "../assets/img/discuss.svg";
 import Share from "../assets/img/share.svg";
@@ -9,14 +8,14 @@ const About = () => {
     <div className='mt-5 container'>
       <div className="container-fluid px-0">
             <h1 className="display-5 fw-bold font-owsald">Travel Log Application</h1>
-            <p className="fs-6">Using a series of features. You can discuss about different travelling destinations and your preferences. Let's go.</p>
+            <p className="fs-6">Using a series of features. You can discuss about different travelling destinations and your preferences. Let&apos;s go.</p>
       </div>
       <div className='d-flex flex-column'>
         <div className='d-flex justify-content-between align-items-center my-5'>
           <img src={Connect} alt="Connecting persons" width={300} height={300} />
           <div className='col-md-5'>
             <h1 className='font-owsald'>Connect...</h1>
-            <p>Finding fellow travelers who share your passion and destination preferences. Let's connect and explore together.</p>
+            <p>Finding fellow travelers who share your passion and destination preferences. Let&apos;s connect and explore together.</p>
           </div>
         </div>
 

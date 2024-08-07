@@ -6,7 +6,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-
 } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -19,6 +18,8 @@ import ProfilePage from "./components/ProfilePage";
 import Posts from "./components/Posts";
 import Anonymous from './middleware/Anonymous'
 import PostPage from "./components/PostPage";
+
+
 
 function App() {
   const { show } = useAlert()

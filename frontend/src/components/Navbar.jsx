@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert'
 import NavLogo from "../assets/img/navlogo-next.png";
@@ -79,10 +78,10 @@ const Navbar = () => {
                                 </>
                         }
 
-                        {/* <Link className='btn btn-primary mx-1' onClick={handleLogout}>Log Out</Link> */}
                     </div>
                 </div>
             </nav>
+
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import SignupImg from '../assets/img/signup.svg';
@@ -20,7 +20,7 @@ const Signup = () => {
         message: 'Password and Confirm Password Must Match'
       });
     } else {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/signup`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ const Signup = () => {
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
           <input type="email" className="form-control" id="email" name="email" onChange={onChange} value={data.email} />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          <div id="emailHelp" className="form-text">We&pos;ll never share your email with anyone else.</div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>

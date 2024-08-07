@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import Loading from '../assets/loading-component/Loading';
-import jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import { MdOutlineReply } from 'react-icons/md';
 
 const PostPage = () => {
@@ -13,11 +13,13 @@ const PostPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const postID = location.pathname.split('/')[2];
-  const decodedJWT = localStorage.getItem('auth-token') ? jwt_decode(localStorage.getItem('auth-token')) : null;
+  const decodedJWT = localStorage.getItem('auth-token') ? jwtDecode(localStorage.getItem('auth-token')) : null;
+  // const decodedJWT = "";
 
   const fetchPost = useCallback(async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getpost/${postID}`);
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getpost/${postID}`);
     const data = await response.json();
+    console.log(data);
     if (data.post) {
       setPost(data.post);
     } else {
@@ -26,7 +28,7 @@ const PostPage = () => {
   }, [navigate, postID]);
 
   const fetchComments = useCallback(async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/getcomments/${postID}`);
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getcomments/${postID}`);
     const data = await response.json();
     setAllComments(data);
   }, [postID]);
@@ -37,7 +39,7 @@ const PostPage = () => {
   }, [fetchPost, fetchComments]);
 
   const handleCommentPost = async () => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/commentpost/${postID}`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/commentpost/${postID}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +64,7 @@ const PostPage = () => {
       });
       return;
     }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/post/likepost/${postID}`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/likepost/${postID}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

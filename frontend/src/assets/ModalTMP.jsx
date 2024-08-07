@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +12,7 @@ function ModalTMP() {
   const [name, setName] = useState(user.name);
 
   const editUser = async (name) => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/editinfo/edit`, {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/editinfo/edit`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -67,8 +67,7 @@ function ModalTMP() {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Your Name" onChange={(e) => setName
-                (e.target.value)} value={name} />
+              <Form.Control type="text" placeholder="Your Name" onChange={(e) => setName(e.target.value)} value={name} />
 
             </Form.Group>
             

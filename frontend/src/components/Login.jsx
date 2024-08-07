@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import  { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import LoginImg from '../assets/img/login.svg';
@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const Login = () => {
             value={data.email}
           />
           <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+            We&apos;ll never share your email with anyone else.
           </div>
         </div>
         <div className="mb-3">

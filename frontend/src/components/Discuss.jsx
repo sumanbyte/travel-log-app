@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Loading from '../assets/loading-component/Loading';
 import PostCard from './PostCard';
 import usePost from '../hooks/usePost';
