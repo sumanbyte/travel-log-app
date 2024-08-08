@@ -2,7 +2,7 @@ import PostContext from "./postContext";
 import { useEffect, useState } from "react";
 const PostState = (props)=>{
     let loading = false;
-    const [userPosts, setUserPosts] = useState([])
+    const [userPosts, setUserPosts] = useState(null);
     const [allPosts, setAllPosts] = useState(null)
     const [individualPost, setIndividualPost] = useState(null);
 

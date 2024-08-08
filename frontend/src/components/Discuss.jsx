@@ -57,7 +57,8 @@ export const Discuss = () => {
       message: 'Post Created successfully',
     });
   }, [createPost, setShow, setAlert, userData]);
-console.log("i am running from discuss component")
+  // console.log(userPosts);
+  console.log("i am running from discuss component")
   return (
     <div className="container my-4">
       <div className="mb-3">
@@ -101,11 +102,12 @@ console.log("i am running from discuss component")
           <div className="text-center">
             <Loading />
           </div>
-        ) : userPosts.length <= 0 ? (
-          "Haha, you've no posts kid"
-        ) : (
-          userPosts.map((data) => <PostCard key={data._id} data={data} />)
-        )}
+        ) : !userPosts ? "Some error occured" :
+          userPosts.length <= 0 ? (
+            "You don't have any posts."
+          ) : (
+            userPosts.map((data) => <PostCard key={data._id} data={data} />)
+          )}
       </div>
     </div>
   );
