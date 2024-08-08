@@ -10,8 +10,6 @@ function Alert() {
     <Row>
       <Col xs={6}>
         <ToastContainer position="bottom-end">
-
-
           <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide bg={alert.color}>
             <Toast.Header>
               <img
