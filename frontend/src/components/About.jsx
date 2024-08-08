@@ -2,13 +2,19 @@ import Connect from "../assets/img/connect.svg";
 import Discuss from "../assets/img/discuss.svg";
 import Share from "../assets/img/share.svg";
 import Enjoy from "../assets/img/enjoy.svg";
+import { FaGithub } from "react-icons/fa";
+import { FaMedium } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom"
+
+
 
 const About = () => {
   return (
     <div className='mt-5 container'>
       <div className="container-fluid px-0">
-            <h1 className="display-5 fw-bold font-owsald">Travel Log Application</h1>
-            <p className="fs-6">Using a series of features. You can discuss about different travelling destinations and your preferences. Let&apos;s go.</p>
+        <h1 className="display-5 fw-bold font-owsald">Travel Log Application</h1>
+        <p className="fs-6">Using a series of features. You can discuss about different travelling destinations and your preferences. Let&apos;s go.</p>
       </div>
       <div className='d-flex flex-column'>
         <div className='d-flex justify-content-between align-items-center my-5'>
@@ -43,6 +49,21 @@ const About = () => {
           </div>
           <img src={Enjoy} alt="Enjoying Person" width={300} height={300} />
 
+        </div>
+      </div>
+
+      <div className="">
+        <p>Developer: Suman Parajuli</p>
+        <div className="d-flex" style={{ gap: "20px" }}>
+          <Link to={`https://github.com/sumanbyte`} target="_blank"
+          ><FaGithub size={20} />
+          </Link>
+          <Link to={'https://www.linkedin.com/in/sumanbyte/'} target="_blank">
+            <FaLinkedin size={20} />
+          </Link>
+          <Link to={'https://medium.com/@sumanbyte'} target="_blank">
+            <FaMedium size={20} />
+          </Link>
         </div>
       </div>
     </div>

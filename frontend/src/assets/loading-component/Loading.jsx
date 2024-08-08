@@ -1,7 +1,8 @@
-import loading from '../img/loading.gif'
 const Loading = () => {
   return (
-    <img src={loading} alt="" />
+    <div className="spinner-border text-dark" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
   )
 }
 
