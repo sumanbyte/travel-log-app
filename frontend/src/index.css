@@ -101,6 +101,12 @@ nav {
 
 /* Small screen adjustments */
 @media screen and (max-width: 768px) {
+  .login-signup-img{
+    display: none;
+  }
+  .login-signup-form{
+    width: 100%;
+  }
   .btn-responsive {
     padding: 0.25rem 0.5rem !important; /* btn-sm equivalent padding */
     font-size: 0.875rem !important; /* btn-sm equivalent font-size */

@@ -55,8 +55,8 @@ const Signup = () => {
 
   return (
     <div className="container my-4 d-flex justify-content-between">
-      <img className="col-md-4" src={SignupImg} alt="Signup" width={500} height={500} />
-      <form className="form-control-sm col-md-6" onSubmit={handleSignup}>
+      <img className="col-md-4 login-signup-img" src={SignupImg} alt="Signup" width={500} height={500} />
+      <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleSignup}>
         <h1 className="fs-2 mb-4 font-owsald">Create An Account on Travel Log</h1>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Full Name</label>
@@ -65,7 +65,7 @@ const Signup = () => {
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
           <input type="email" className="form-control" id="email" name="email" onChange={onChange} value={data.email} />
-          <div id="emailHelp" className="form-text">We&pos;ll never share your email with anyone else.</div>
+          <div id="emailHelp" className="form-text">We&apos;ll never share your email with anyone else.</div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>

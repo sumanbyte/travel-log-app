@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <div className="container my-4 d-flex justify-content-between align-items-center">
-      <form className="form-control-sm col-md-6" onSubmit={handleLogin}>
+      <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleLogin}>
         <h1 className="mb-4 fs-2 font-oswald">Login to Travel Log</h1>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -96,7 +96,7 @@ const Login = () => {
           Login
         </button>
       </form>
-      <img className="col-md-4" src={LoginImg} alt="Login" width={500} height={500} />
+      <img className="col-md-4 login-signup-img" src={LoginImg} alt="Login" width={500} height={500} />
     </div>
   );
 };
