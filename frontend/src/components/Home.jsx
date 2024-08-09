@@ -6,7 +6,7 @@ const Home = () => {
   return (
     < >
 
-      <div className='img-banner'>
+      <div className='img-banner container'>
         <div className="banner-content-wrapper max-width-boundary">
 
           <div className="banner-left-text margin-top-all">
@@ -21,7 +21,7 @@ const Home = () => {
                     1000, // wait 1s before replacing "Mice" with "Hamsters"
                     'Enjoy.',
                     1000,
-                    'Discuss...',
+                    'Discuss.',
                     1000,
                   ]}
                   wrapper="span"
@@ -32,11 +32,24 @@ const Home = () => {
               </span>
             </h1>
             <p>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
-            <Link type="button" className="btn btn-primary btn-lg" to={'/login'}>Join Us</Link>
-            <Link type="button" className="btn btn-outline-dark btn-lg mx-2" to={"/about"}>Learn More</Link>
+
+              <Link
+                type="button"
+                className="btn btn-primary btn-responsive"
+                to={'/login'}
+              >
+                Join Us
+              </Link>
+              <Link
+                type="button"
+                className="btn btn-outline-dark btn-responsive mx-2 mx-sm-1"
+                to={"/about"}
+              >
+                Learn More
+              </Link>
           </div>
 
-          <div className="banner-right-image margin-top-all">
+          <div className="banner-right-image px-2 margin-top-all">
             <img src={BeforeDawn} alt="Nature" />
           </div>
 

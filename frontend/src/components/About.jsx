@@ -51,21 +51,22 @@ const About = () => {
 
         </div>
       </div>
-
-      <div className="">
-        <p>Developer: Suman Parajuli</p>
+      <hr />
+      <div className="d-flex align-items-center justify-content-between">
+        <p className="font-owsald fs-3"><span className="">Developer:  </span> Suman Parajuli</p>
         <div className="d-flex" style={{ gap: "20px" }}>
           <Link to={`https://github.com/sumanbyte`} target="_blank"
-          ><FaGithub size={20} />
+          ><FaGithub color="black" size={25} />
           </Link>
           <Link to={'https://www.linkedin.com/in/sumanbyte/'} target="_blank">
-            <FaLinkedin size={20} />
+            <FaLinkedin color="black" size={25} />
           </Link>
           <Link to={'https://medium.com/@sumanbyte'} target="_blank">
-            <FaMedium size={20} />
+            <FaMedium color="black" size={25} />
           </Link>
         </div>
       </div>
+      <hr />
     </div>
   )
 }
