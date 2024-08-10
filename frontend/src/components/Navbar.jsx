@@ -56,8 +56,8 @@ const Navbar = () => {
                         </ul>
                         {!localStorage.getItem('auth-token') ? (
                             <>
-                                <Link className="btn btn-primary mx-1 btn-sm" to='/login'>Login</Link>
-                                <Link className="btn btn-success btn-sm" to='/signup'>Create Account</Link>
+                                <Link className="btn btn-primary mx-1 btn-sm" to='/login' onClick={handleClick}>Login</Link>
+                                <Link className="btn btn-success btn-sm" to='/signup' onClick={handleClick}>Create Account</Link>
                             </>
                         ) : (
                             <>

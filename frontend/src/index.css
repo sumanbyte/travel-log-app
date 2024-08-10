@@ -75,6 +75,13 @@ nav {
   font-size: 1.25rem !important; /* Default font-size */
 }
 
+.hero-text-mobile{
+  display: none;
+}
+.hero-text{
+  display: block;
+}
+
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
     margin: 20px 0;
@@ -84,28 +91,42 @@ nav {
   }
 
   .btn-responsive {
-    padding: 0.375rem 0.75rem !important; 
+    padding: 0.375rem 0.75rem !important;
     font-size: 1rem !important;
-    
   }
   .banner-left-text {
     font-size: 15px;
   }
-  .banner-text-heading{
+  .banner-text-heading {
     font-size: 45px;
   }
-  .margin-top-all{
+  .margin-top-all {
     margin-top: 50px;
   }
 }
 
 /* Small screen adjustments */
 @media screen and (max-width: 768px) {
-  .login-signup-img{
+  .login-signup-img {
     display: none;
   }
-  .login-signup-form{
+  .login-signup-form {
     width: 100%;
+  }
+  .img-full-width {
+    width: 100%;
+  }
+  .dev-name,
+  .dev-info {
+    width: 100%;
+  }
+  .dev-info {
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .dev-name {
+    text-align: center;
   }
   .btn-responsive {
     padding: 0.25rem 0.5rem !important; /* btn-sm equivalent padding */
@@ -113,11 +134,22 @@ nav {
   }
 }
 
-@media screen and (max-width: 456px){
-  .banner-left-text {
-    font-size: 11px;
+@media screen and (max-width: 456px) {
+  .banner-content-wrapper {
+    display: block;
+    justify-content: initial;
+    /* height: 100vh; */
   }
-  .banner-text-heading{
-    font-size: 30px;
+  .banner-left-text {
+    font-size: 13px;
+  }
+  .hero-text-mobile{
+    display: block;
+  }
+  .hero-text{
+    display: none;
+  }
+  .banner-text-heading {
+    font-size: 35px;
   }
 }

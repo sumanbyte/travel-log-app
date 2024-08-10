@@ -52,7 +52,7 @@ const Login = () => {
   return (
     <div className="container my-4 d-flex justify-content-between align-items-center">
       <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleLogin}>
-        <h1 className="mb-4 fs-2 font-oswald">Login to Travel Log</h1>
+        <h1 className="mb-4 fs-2 font-owsald">Login to Travel Log</h1>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address

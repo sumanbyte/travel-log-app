@@ -31,7 +31,8 @@ const Home = () => {
                 />
               </span>
             </h1>
-            <p>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
+            <p className='hero-text'>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
+            <p className='hero-text-mobile'>Travel Log is a App Built to make travelling much easier by Providing Bunch of features and discussing Capabilities</p>
 
               <Link
                 type="button"

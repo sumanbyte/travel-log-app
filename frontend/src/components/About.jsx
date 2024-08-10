@@ -18,43 +18,43 @@ const About = () => {
       </div>
       <div className='d-flex flex-column '>
         <div className='d-flex justify-content-between align-items-center my-5 flex-wrap'>
-          <img src={Connect} alt="Connecting persons" width={300} height={300} />
+          <img className="img-full-width" src={Connect} alt="Connecting persons" width={300} height={300} />
           <div className='col-md-5'>
             <h1 className='font-owsald'>Connect...</h1>
             <p>Finding fellow travelers who share your passion and destination preferences. Let&apos;s connect and explore together.</p>
           </div>
         </div>
 
-        <div className='d-flex justify-content-between align-items-center my-5'>
+        <div className='d-flex justify-content-between align-items-center my-5 flex-wrap'>
           <div className='col-md-5'>
             <h1 className='font-owsald'>Discuss...</h1>
             <p>Join the conversation about your favorite travel spots and share your experiences with others who have been there.</p>
           </div>
-          <img src={Discuss} alt="Discussing Person" width={300} height={300} />
+          <img className="img-full-width" src={Discuss} alt="Discussing Person" width={300} height={300} />
 
         </div>
 
-        <div className='d-flex justify-content-between align-items-center my-5'>
-          <img src={Share} alt="Sharing Person" width={300} height={300} />
+        <div className='d-flex justify-content-between align-items-center my-5 flex-wrap'>
+          <img className="img-full-width" src={Share} alt="Sharing Person" width={300} height={300} />
           <div className='col-md-5'>
             <h1 className='font-owsald'>Share...</h1>
             <p>Post your travel logs and tips about various destinations. Engage with others and share your journey.</p>
           </div>
         </div>
 
-        <div className='d-flex justify-content-between align-items-center my-5'>
+        <div className='d-flex justify-content-between align-items-center my-5 flex-wrap'>
           <div className='col-md-5'>
             <h1 className='font-owsald'>Enjoy...</h1>
             <p>Experience the joy of discovering new places through the eyes of fellow travelers. Share, explore, and enjoy your adventures.</p>
           </div>
-          <img src={Enjoy} alt="Enjoying Person" width={300} height={300} />
+          <img className="img-full-width" src={Enjoy} alt="Enjoying Person" width={300} height={300} />
 
         </div>
       </div>
       <hr />
-      <div className="d-flex align-items-center justify-content-between">
-        <p className="font-owsald fs-3"><span className="">Developer:  </span> Suman Parajuli</p>
-        <div className="d-flex" style={{ gap: "20px" }}>
+      <div className="d-flex align-items-center justify-content-between flex-wrap">
+        <p className="font-owsald fs-3 dev-name" style={{margin: "0", paddingRight: "20px"}}><span className="">Developer:  </span> Suman Parajuli</p>
+        <div className="d-flex dev-info" style={{ gap: "30px" }}>
           <Link to={`https://github.com/sumanbyte`} target="_blank"
           ><FaGithub color="black" size={25} />
           </Link>
