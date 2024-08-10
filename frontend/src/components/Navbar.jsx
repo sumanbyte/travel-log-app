@@ -1,13 +1,19 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import useAlert from '../hooks/useAlert';
 import NavLogo from "../assets/img/navlogo-next.png";
-import { useRef } from 'react';
+
+import NavLogoLight from "../assets/img/navlogo-dark.png";
+import { useEffect, useRef } from 'react';
+import useMode from "../hooks/useMode";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const { setAlert, setShow } = useAlert();
+    const {darkMode, setDarkMode} = useMode();
+    // console.log(darkMode, setDarkMode);
     const navbarCollapse = useRef(null);
 
     const handleLogout = () => {
@@ -27,12 +33,22 @@ const Navbar = () => {
         navbarCollapse.current.classList.toggle("show")
     };
 
+    useEffect(()=> {
+        if(!localStorage.getItem("darkMode")){
+            localStorage.setItem("darkMode", JSON.stringify(false));
+        }
+    }, []);
+
     return (
-        <>
-            <nav className={`navbar navbar-expand-lg max-width-boundary`}>
-                <div className="container-fluid">
+            <nav className={`navbar navbar-expand-lg  ${darkMode ? "navbar-dark bg-dark": ""} dark-mode-transition`} >
+                <div className="container-fluid max-width-boundary">
                     <Link className="navbar-brand" to="/">
+                    {
+                        darkMode ? 
+                        <img src={NavLogoLight} alt="navlogo" width={110} height={35} />
+                        :
                         <img src={NavLogo} alt="navlogo" width={110} height={35} />
+                    }
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -65,10 +81,24 @@ const Navbar = () => {
                                 <Link className='btn btn-success mx-2 btn-sm' to={'/profile'} onClick={handleClick}>Profile</Link>
                             </>
                         )}
+                        <div className='mode-btn'>
+                        {
+                            darkMode ? 
+                            <MdLightMode onClick={()=> {
+                                setDarkMode(false);
+                                localStorage.setItem("darkMode", JSON.stringify(false))
+                            }} size={35} color="white" />
+                            :
+                            <MdDarkMode onClick={()=> {
+                                setDarkMode(true)
+                                localStorage.setItem("darkMode", JSON.stringify(true))
+                            }} size={35} />
+                        }
+                        </div>
+
                     </div>
                 </div>
             </nav>
-        </>
     );
 };
 

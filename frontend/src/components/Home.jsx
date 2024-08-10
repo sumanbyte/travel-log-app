@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import BeforeDawn from "../assets/img/before_dawn.svg";
+import useMode from '../hooks/useMode';
 
 const Home = () => {
+  const { darkMode } = useMode();
   return (
-    < >
+    <>
 
-      <div className='img-banner container'>
-        <div className="banner-content-wrapper max-width-boundary">
+      <div className={`img-banner dark-mode-transition  ${darkMode ? "dark-mode" : ""}`}>
+        <div className=" container banner-content-wrapper max-width-boundary">
 
           <div className="banner-left-text margin-top-all">
             <h1 className='banner-text-heading '>Travelling Is Great <br />
@@ -34,20 +36,20 @@ const Home = () => {
             <p className='hero-text'>Travel Log is a App Built to make travelling much easier <br /> by Providing Bunch of features and discussing Capabilities</p>
             <p className='hero-text-mobile'>Travel Log is a App Built to make travelling much easier by Providing Bunch of features and discussing Capabilities</p>
 
-              <Link
-                type="button"
-                className="btn btn-primary btn-responsive"
-                to={'/login'}
-              >
-                Join Us
-              </Link>
-              <Link
-                type="button"
-                className="btn btn-outline-dark btn-responsive mx-2 mx-sm-1"
-                to={"/about"}
-              >
-                Learn More
-              </Link>
+            <Link
+              type="button"
+              className="btn btn-primary btn-responsive"
+              to={'/login'}
+            >
+              Join Us
+            </Link>
+            <Link
+              type="button"
+              className="btn btn-outline-dark btn-responsive mx-2 mx-sm-1"
+              to={"/about"}
+            >
+              Learn More
+            </Link>
           </div>
 
           <div className="banner-right-image px-2 margin-top-all">

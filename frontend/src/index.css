@@ -82,6 +82,22 @@ nav {
   display: block;
 }
 
+.mode-btn{
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.dark-mode{
+  background-color: rgb(33 37 41);
+  color: white !important;
+}
+
+.dark-mode-transition{
+  transition: all .55s ease-in-out;
+}
+
+
+
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
     margin: 20px 0;

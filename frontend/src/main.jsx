@@ -5,12 +5,15 @@ import './index.css'
 import AlertState from './context/AlertState.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import ModeStateProvider from './context/ModeState.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AlertState>
-      <App />
-    </AlertState>
+    <ModeStateProvider>
+      <AlertState>
+        <App />
+      </AlertState>
+    </ModeStateProvider>
   </React.StrictMode>,
 )
