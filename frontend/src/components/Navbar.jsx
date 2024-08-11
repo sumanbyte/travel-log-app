@@ -56,18 +56,18 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent" ref={navbarCollapse}>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
-                                <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} aria-current="page" to="/" onClick={handleClick}>Home</Link>
+                                <Link className={`nav-link ${location.pathname === '/' ? 'active' : 'non-active'}`} aria-current="page" to="/" onClick={handleClick}>Home</Link>
                             </li>
                             {localStorage.getItem('auth-token') && (
                                 <li className="nav-item mx-2">
-                                    <Link className={`nav-link ${location.pathname === '/createpost' ? 'active' : ''}`} to="/createpost" onClick={handleClick}>Create Post</Link>
+                                    <Link className={`nav-link ${location.pathname === '/createpost' ? 'active' : 'non-active'}`} to="/createpost" onClick={handleClick}>Create Post</Link>
                                 </li>
                             )}
                             <li className="nav-item mx-2">
-                                <Link className={`nav-link ${location.pathname === '/posts' ? 'active' : ''}`} to="/posts" onClick={handleClick}>Posts</Link>
+                                <Link className={`nav-link ${location.pathname === '/posts' ? 'active' : 'non-active'}`} to="/posts" onClick={handleClick}>Posts</Link>
                             </li>
                             <li className="nav-item mx-2">
-                                <Link className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} to="/about" onClick={handleClick}>About</Link>
+                                <Link className={`nav-link ${location.pathname === '/about' ? 'active' : 'non-active'}`} to="/about" onClick={handleClick}>About</Link>
                             </li>
                         </ul>
                         {!localStorage.getItem('auth-token') ? (

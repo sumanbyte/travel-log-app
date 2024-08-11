@@ -92,6 +92,10 @@ nav {
   color: white !important;
 }
 
+.non-active{
+  color: rgb(197, 197, 187) !important;
+}
+
 .dark-mode-transition{
   transition: all .55s ease-in-out;
 }

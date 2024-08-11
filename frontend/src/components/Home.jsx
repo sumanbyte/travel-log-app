@@ -45,7 +45,7 @@ const Home = () => {
             </Link>
             <Link
               type="button"
-              className="btn btn-outline-dark btn-responsive mx-2 mx-sm-1"
+              className={`btn ${darkMode ? "btn-outline-light": "btn-outline-dark"} btn-responsive mx-2 mx-sm-1`}
               to={"/about"}
             >
               Learn More
