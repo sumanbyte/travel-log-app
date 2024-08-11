@@ -23,7 +23,11 @@ nav {
 .banner-content-wrapper {
   display: flex;
   justify-content: space-around;
-  height: 100vh;
+  align-items: center;
+}
+
+.img-banner{
+  padding-top: 50px;
 }
 
 .banner-text-heading {
@@ -92,8 +96,12 @@ nav {
   color: white !important;
 }
 
-.non-active{
+.non-active-light{
   color: rgb(197, 197, 187) !important;
+}
+
+.non-active-dark{
+  color: rgb(130, 124, 124) !important;
 }
 
 .dark-mode-transition{
@@ -118,8 +126,12 @@ nav {
     font-size: 15px;
   }
   .banner-text-heading {
-    font-size: 45px;
+    font-size: 55px;
   }
+  .banner-content-wrapper {
+    display: block;
+  }
+  
   .margin-top-all {
     margin-top: 50px;
   }

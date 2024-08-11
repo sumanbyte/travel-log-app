@@ -3,11 +3,13 @@ import Loading from '../assets/loading-component/Loading';
 import PostCard from './PostCard';
 import usePost from '../hooks/usePost';
 import useAlert from '../hooks/useAlert';
+import useMode from '../hooks/useMode';
 
 export const Discuss = () => {
   const { setShow, setAlert } = useAlert();
   const [userData, setUserData] = useState({ title: '', description: '' });
   const { getAllPost, userPosts, loading, createPost } = usePost();
+  const {darkMode} = useMode();
 
   useEffect(() => {
     getAllPost();
@@ -60,54 +62,56 @@ export const Discuss = () => {
   // console.log(userPosts);
   console.log("i am running from discuss component")
   return (
-    <div className="container my-4">
-      <div className="mb-3">
-        <label htmlFor="title" className="form-label">
-          Title
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="title"
-          name="title"
-          onChange={handleChange}
-          value={userData.title}
-        />
-      </div>
+    <div className={`${darkMode ? "dark-mode": ""} dark-mode-transition`} style={{minHeight: "calc(100vh - 61px)"}}>
+      <div className="container pt-4">
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            name="title"
+            onChange={handleChange}
+            value={userData.title}
+          />
+        </div>
 
-      <div className="mb-3">
-        <label htmlFor="description" className="form-label">
-          Description
-        </label>
-        <textarea
-          className="form-control"
-          id="description"
-          rows="3"
-          name="description"
-          onChange={handleChange}
-          value={userData.description}
-          onKeyDown={handleKeyDown}
-        ></textarea>
-        <button
-          disabled={userData.title.length <= 3 || userData.description.length <= 3}
-          className="btn btn-primary my-1 text-right"
-          onClick={handleClick}
-        >
-          Create Post
-        </button>
-      </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            id="description"
+            rows="3"
+            name="description"
+            onChange={handleChange}
+            value={userData.description}
+            onKeyDown={handleKeyDown}
+          ></textarea>
+          <button
+            disabled={userData.title.length <= 3 || userData.description.length <= 3}
+            className="btn btn-primary my-1 text-right"
+            onClick={handleClick}
+          >
+            Create Post
+          </button>
+        </div>
 
-      <div className="post-card">
-        {loading ? (
-          <div className="text-center">
-            <Loading />
-          </div>
-        ) : !userPosts ? "Some error occured" :
-          userPosts.length <= 0 ? (
-            "You don't have any posts."
-          ) : (
-            userPosts.map((data) => <PostCard key={data._id} data={data} />)
-          )}
+        <div className="post-card">
+          {loading ? (
+            <div className="text-center">
+              <Loading />
+            </div>
+          ) : !userPosts ? "Some error occured" :
+            userPosts.length <= 0 ? (
+              "You don't have any posts."
+            ) : (
+              userPosts.map((data) => <PostCard key={data._id} data={data} />)
+            )}
+        </div>
       </div>
     </div>
   );

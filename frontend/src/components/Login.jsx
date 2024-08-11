@@ -1,12 +1,14 @@
-import  { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import LoginImg from '../assets/img/login.svg';
+import useMode from '../hooks/useMode';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
   const { setShow, setAlert } = useAlert();
   const navigate = useNavigate();
+  const { darkMode } = useMode();
 
   console.log('i am running from login component');
 
@@ -50,53 +52,55 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="container my-4 d-flex justify-content-between align-items-center">
-      <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleLogin}>
-        <h1 className="mb-4 fs-2 font-owsald">Login to Travel Log</h1>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            name="email"
-            onChange={handleChange}
-            value={data.email}
-          />
-          <div id="emailHelp" className="form-text">
-            We&apos;ll never share your email with anyone else.
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{minHeight: "calc(100vh - 61px)"}}>
+      <div className={` container pt-4 d-flex justify-content-between align-items-center`}>
+        <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleLogin}>
+          <h1 className="mb-4 fs-2 font-owsald">Login to Travel Log</h1>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              name="email"
+              onChange={handleChange}
+              value={data.email}
+            />
+            <div id="emailHelp" className="mt-1" style={{fontSize: "12px"}}>
+              We&apos;ll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            name="password"
-            onChange={handleChange}
-            value={data.password}
-          />
-        </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Remember me
-          </label>
-        </div>
-        <button
-          type="submit"
-          disabled={!(data.email && data.password)}
-          className="btn btn-primary btn-sm"
-        >
-          Login
-        </button>
-      </form>
-      <img className="col-md-4 login-signup-img" src={LoginImg} alt="Login" width={500} height={500} />
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              name="password"
+              onChange={handleChange}
+              value={data.password}
+            />
+          </div>
+          <div className="mb-3 form-check">
+            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+            <label className="form-check-label" htmlFor="exampleCheck1">
+              Remember me
+            </label>
+          </div>
+          <button
+            type="submit"
+            disabled={!(data.email && data.password)}
+            className="btn btn-primary btn-sm"
+          >
+            Login
+          </button>
+        </form>
+        <img className="col-md-4 login-signup-img" src={LoginImg} alt="Login" width={500} height={500} />
+      </div>
     </div>
   );
 };

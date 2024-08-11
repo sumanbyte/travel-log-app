@@ -2,9 +2,11 @@ import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import SignupImg from '../assets/img/signup.svg';
+import useMode from '../hooks/useMode';
 
 const Signup = () => {
   const { setShow, setAlert } = useAlert();
+  const {darkMode} = useMode();
   const navigate = useNavigate();
   const [data, setData] = useState({ name: '', email: '', password: '', cpassword: '' });
 
@@ -54,35 +56,38 @@ const Signup = () => {
   }, [data]);
 
   return (
-    <div className="container my-4 d-flex justify-content-between">
-      <img className="col-md-4 login-signup-img" src={SignupImg} alt="Signup" width={500} height={500} />
-      <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleSignup}>
-        <h1 className="fs-2 mb-4 font-owsald">Create An Account on Travel Log</h1>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">Full Name</label>
-          <input type="text" className="form-control" id="name" name="name" onChange={onChange} value={data.name} />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" className="form-control" id="email" name="email" onChange={onChange} value={data.email} />
-          <div id="emailHelp" className="form-text">We&apos;ll never share your email with anyone else.</div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" name="password" onChange={onChange} value={data.password} />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-          <input type="password" className="form-control" id="cpassword" name="cpassword" onChange={onChange} value={data.cpassword} />
-        </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" className="btn btn-primary btn-sm" disabled={!data.name || !data.email || !data.password || !data.cpassword}>
-          Create Account
-        </button>
-      </form>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{minHeight: "calc(100vh - 61px)"}}>
+
+      <div className="container pt-4 d-flex justify-content-between">
+        <img className="col-md-4 login-signup-img" src={SignupImg} alt="Signup" width={500} height={500} />
+        <form className="form-control-sm col-md-6 login-signup-form" onSubmit={handleSignup}>
+          <h1 className="fs-2 mb-4 font-owsald">Create An Account on Travel Log</h1>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">Full Name</label>
+            <input type="text" className="form-control" id="name" name="name" onChange={onChange} value={data.name} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email address</label>
+            <input type="email" className="form-control" id="email" name="email" onChange={onChange} value={data.email} />
+            <div id="emailHelp" className="mt-1" style={{fontSize: "12px"}}>We&apos;ll never share your email with anyone else.</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input type="password" className="form-control" id="password" name="password" onChange={onChange} value={data.password} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="cpassword" className="form-label">Confirm Password</label>
+            <input type="password" className="form-control" id="cpassword" name="cpassword" onChange={onChange} value={data.cpassword} />
+          </div>
+          <div className="mb-3 form-check">
+            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" className="btn btn-primary btn-sm" disabled={!data.name || !data.email || !data.password || !data.cpassword}>
+            Create Account
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

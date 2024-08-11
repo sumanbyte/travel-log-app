@@ -8,10 +8,10 @@ const Home = () => {
   return (
     <>
 
-      <div className={`img-banner dark-mode-transition  ${darkMode ? "dark-mode" : ""}`}>
+      <div className={`img-banner dark-mode-transition  ${darkMode ? "dark-mode" : ""}`} style={{minHeight: "calc(100vh - 61px)"}}>
         <div className=" container banner-content-wrapper max-width-boundary">
 
-          <div className="banner-left-text margin-top-all">
+          <div className="banner-left-text">
             <h1 className='banner-text-heading '>Travelling Is Great <br />
               <span>WHAT IF ?</span>
               <br />
@@ -52,7 +52,7 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="banner-right-image px-2 margin-top-all">
+          <div className="banner-right-image px-2">
             <img src={BeforeDawn} alt="Nature" />
           </div>
 

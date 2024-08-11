@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
 import usePost from '../hooks/usePost';
 import useAlert from '../hooks/useAlert';
+import useMode from '../hooks/useMode';
 
 
 const PostCard = ({ data }) => {
+  const {darkMode} = useMode();
   const { setShow, setAlert } = useAlert();
   const [editClicked, setEditClicked] = useState(false);
   const [postState, setPostState] = useState({
@@ -63,8 +65,9 @@ const PostCard = ({ data }) => {
   console.log('i am running from postcard component');
 
   return (
-    <div className="card my-2">
-      <div className="card-body">
+    <div className='py-2'>   
+       <div className="card">
+      <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition card-body`}>
         {!editClicked ? (
           <>
             <p>
@@ -119,6 +122,8 @@ const PostCard = ({ data }) => {
         )}
       </div>
     </div>
+    </div>
+
   );
 };
 
