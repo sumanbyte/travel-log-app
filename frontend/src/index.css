@@ -135,6 +135,11 @@ nav {
   .margin-top-all {
     margin-top: 50px;
   }
+
+  .mode-btn{
+    margin-left: 0px;
+    margin-top: 15px;
+  }
 }
 
 /* Small screen adjustments */
@@ -173,7 +178,7 @@ nav {
     /* height: 100vh; */
   }
   .banner-left-text {
-    font-size: 13px;
+    font-size: 14px;
   }
   .hero-text-mobile{
     display: block;
@@ -181,6 +186,17 @@ nav {
   .hero-text{
     display: none;
   }
+  .banner-text-heading {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+ 
+  .banner-left-text {
+    font-size: 13px;
+  }
+
   .banner-text-heading {
     font-size: 35px;
   }
