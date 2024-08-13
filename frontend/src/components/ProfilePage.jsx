@@ -27,14 +27,14 @@ function ProfilePage() {
         </>
           : !user ?
             <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>Some error occured</Card.Body> :
-            <>
+            <div  className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>
               <h2 className='text-center mx-3 my-2'>Your Profile</h2>
-              <Card.Body>
+              <Card.Body >
                 <Card.Title>Name: {user.name}</Card.Title>
                 <Card.Title>Email: {user.email}</Card.Title>
                 <ModalTMP name={user.name} />
               </Card.Body>
-            </>
+            </div>
       }
 
     </Card>
