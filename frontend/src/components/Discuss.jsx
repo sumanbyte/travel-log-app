@@ -8,7 +8,7 @@ import useMode from '../hooks/useMode';
 export const Discuss = () => {
   const { setShow, setAlert } = useAlert();
   const [userData, setUserData] = useState({ title: '', description: '' });
-  const { getAllPost, userPosts, loading, createPost } = usePost();
+  const { getAllPost, userPosts, loading, error,  createPost } = usePost();
   const {darkMode} = useMode();
 
   useEffect(() => {
@@ -105,11 +105,11 @@ export const Discuss = () => {
             <div className="text-center">
               <Loading />
             </div>
-          ) : !userPosts ? "Some error occured" :
-            userPosts.length <= 0 ? (
+          ) : error ? error :
+           userPosts && userPosts.length <= 0 ? (
               "You don't have any posts."
             ) : (
-              userPosts.map((data) => <PostCard key={data._id} data={data} />)
+             userPosts && userPosts.map((data) => <PostCard key={data._id} data={data} />)
             )}
         </div>
       </div>

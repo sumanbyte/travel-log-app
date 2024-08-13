@@ -16,18 +16,23 @@ const PostState = (props) => {
     }
 
     const getAllPost = async () => {
-        setLoading(true);
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getallpost`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': localStorage.getItem('auth-token')
-            }
-        })
-        const data = await response.json()
-        setUserPosts(data)
-        setLoading(false);
-        return data
+        try{
+            setLoading(true);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getallpost`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('auth-token')
+                }
+            })
+            const data = await response.json()
+            setUserPosts(data)
+            return data;
+        }catch(e){
+            setError("Failed to fetch.")
+        }finally{
+            setLoading(false);
+        }
     }
 
     const createPost = async ({ title, description }) => {
