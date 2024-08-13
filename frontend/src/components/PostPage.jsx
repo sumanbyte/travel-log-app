@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useAlert from '../hooks/useAlert';
 import Loading from '../assets/loading-component/Loading';
 import { jwtDecode } from 'jwt-decode';
-import { MdOutlineReply } from 'react-icons/md';
 import useMode from '../hooks/useMode';
+import Comment from './Comment';
 
 const PostPage = () => {
   const { setShow, setAlert } = useAlert();
@@ -16,7 +16,7 @@ const PostPage = () => {
   const location = useLocation();
   const postID = location.pathname.split('/')[2];
   const decodedJWT = localStorage.getItem('auth-token') ? jwtDecode(localStorage.getItem('auth-token')) : null;
-  const {darkMode} = useMode();
+  const { darkMode } = useMode();
   // const decodedJWT = "";
 
   const fetchPost = useCallback(async () => {
@@ -87,7 +87,7 @@ const PostPage = () => {
   };
 
   return (
-    <div className={`${darkMode ? "dark-mode": ""} dark-mode-transition`}>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
       <div className="pt-5 container font-open">
         <div className="container-fluid py-5">
           {post ? (
@@ -134,7 +134,7 @@ const PostPage = () => {
                 <div className="col-md-12">
                   <div className="col-md-12">
                     <div className="card text-dark">
-                      <div className={`card-body p-4 ${darkMode ? "dark-mode": ""} dark-mode-transition`}>
+                      <div className={`card-body p-4 ${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
                         <h4 className="mb-0 font-owsald">Recent comments</h4>
                         <p className="fw-light mb-4 pb-2">Latest Comments section by users</p>
                         {!allComments ? (
@@ -145,33 +145,7 @@ const PostPage = () => {
                           allComments.map((comment) => (
                             <div key={comment._id}>
                               <hr />
-                              <div className="d-flex flex-start mt-4 font-open">
-                                <img
-                                  className="rounded-circle shadow-1-strong me-3"
-                                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
-                                  alt="avatar"
-                                  width="60"
-                                  height="60"
-                                />
-                                <div style={{ width: '100%' }}>
-                                  <h6 className="fw-bold mb-1">{comment.userName}</h6>
-                                  <div
-                                    className="d-flex align-items-center justify-content-between mb-1"
-                                    style={{ width: '100%' }}
-                                  >
-                                    <span className="badge bg-primary" style={{ fontSize: '13px' }}>
-                                      {comment.userID.name}
-                                    </span>
-                                    <p className="mb-0 mx-2" style={{ fontSize: '15px' }}>
-                                      {new Date(comment.createdAt).toDateString()}
-                                    </p>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <p className="mb-0">{comment.comment}</p>
-                                    <MdOutlineReply className="cursor-pointer mx-2" size={20} title="Reply" />
-                                  </div>
-                                </div>
-                              </div>
+                              <Comment comment={comment} />
                               <hr />
                             </div>
                           ))
