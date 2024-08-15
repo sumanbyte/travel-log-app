@@ -1,6 +1,7 @@
 const Post = require('../models/PostSchema')
 const User = require('../models/UserSchema')
-const Comment = require('../models/CommentSchema')
+const Comment = require('../models/CommentSchema');
+const Reply = require("../models/ReplySchema");
 const mongoose = require('mongoose')
 
 
@@ -92,18 +93,18 @@ const getPost = async (req, res) => {
     const isValidID = mongoose.Types.ObjectId.isValid(id)
 
     if (isValidID) {
-        Post.findOne({_id: id}).populate({
+        Post.findOne({ _id: id }).populate({
             path: 'userID',
             select: 'name'
         }).exec(function (err, post) {
             if (err) {
-                return res.json({ message: "some error occured" , err})
+                return res.json({ message: "some error occured", err })
             } else {
-                return res.status(200).json({status: true, post})
+                return res.status(200).json({ status: true, post })
             }
         })
     } else {
-        return res.json({status: false, message: 'The thing you are trying to get does not exists' })
+        return res.json({ status: false, message: 'The thing you are trying to get does not exists' })
 
     }
 
@@ -163,7 +164,7 @@ const likePost = async (req, res) => {
             const removeLike = await Post.updateOne({ _id: req.params.id }, { likes: [...filteredLikes] });
 
 
-     
+
             res.status(200).json({ message: 'Post like removed', status: false, removeLike })
         }
     } else {
@@ -187,6 +188,31 @@ const commentPost = async (req, res) => {
     } else {
         res.status(200).json({ status: false });
     }
+}
+
+const replyPost = async (req, res) => {
+    const isValidID = mongoose.Types.ObjectId.isValid(req.params.id);
+
+    if (!isValidID) {
+        return res.status(400).json({ status: false, message: "invalid comment id" })
+    }
+
+    const { reply } = req.body;
+
+    const comment = await Comment.findOne({_id: req.params.id});
+
+    if(!comment){
+        return res.status(400).json({status: false, message: "Comment doesn't exists."})
+    }
+
+    const replyCreate = await Reply.create({ commentId: req.params.id, text: reply });
+
+    if (!replyCreate) {
+        return res.status(400).json({ status: false, message: "failed to create a reply." });
+    }
+
+    return res.status(201).json({ status: true, message: "Reply creation success" });
+
 }
 
 // get comments for a given post id function
@@ -220,5 +246,6 @@ module.exports = {
     allPosts,
     likePost,
     commentPost,
+    replyPost,
     getCommentsForAPost
 }
