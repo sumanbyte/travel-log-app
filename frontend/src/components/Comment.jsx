@@ -5,6 +5,23 @@ const Reply = ({ comment, }) => {
     const [reply, setReply] = useState(false);
     const [replyText, setReplyText] = useState("");
 
+    const handleReply = async (commentid)=> {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/replycomment/${commentid}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json",
+                "auth-token": localStorage.getItem("auth-token")
+            },
+            body: JSON.stringify({reply: replyText})
+        })
+
+        const data = await response.json();
+        if(data.status){
+            setReplyText("");
+        }
+        console.log(data)
+    }
+
     return (
         <>
 
@@ -42,7 +59,7 @@ const Reply = ({ comment, }) => {
                         {
                             reply && <div className="input-group input-group-sm mt-1 mb-3">
                                 <input type="text" className="form-control" placeholder='Enter your reply' value={replyText} onChange={(e) => { setReplyText(e.target.value) }} />
-                                <button className='btn btn-sm btn-primary' disabled={replyText.length >= 3 ? false : true}>Reply</button>
+                                <button className='btn btn-sm btn-primary' disabled={replyText.length >= 3 ? false : true} onClick={()=> handleReply(comment._id)}>Reply</button>
                             </div>
 
                         }

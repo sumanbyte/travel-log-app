@@ -199,6 +199,10 @@ const replyPost = async (req, res) => {
 
     const { reply } = req.body;
 
+    if(!reply){
+        return res.status(400).json({status: false, message: "Reply text is required."})
+    }
+
     const comment = await Comment.findOne({_id: req.params.id});
 
     if(!comment){
