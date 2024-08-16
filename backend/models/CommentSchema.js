@@ -16,6 +16,10 @@ const commentSchema = new Schema({
         ref: 'Post',
         required: true
     },
+    hasReply: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

@@ -215,7 +215,28 @@ const replyPost = async (req, res) => {
         return res.status(400).json({ status: false, message: "failed to create a reply." });
     }
 
+    await Comment.updateOne({commentId: comment._id}, {hasReply: true})
+
     return res.status(201).json({ status: true, message: "Reply creation success" });
+
+}
+
+const getRepliesForAComment = async (req, res) => {
+    const commentId = req.params.id;
+
+    const isValid = mongoose.Types.ObjectId.isValid(commentId);
+
+    if(!isValid){
+        return res.status(400).json({status: false, message: "provide a valid commentid"})
+    }
+
+    const replies = await Reply.findOne({commentId});
+
+    if(!replies){
+        return res.status(400).json({status: false, message: "Reply doesn't exists"})
+    }
+
+    return res.status(200).json({status: true, replies});
 
 }
 

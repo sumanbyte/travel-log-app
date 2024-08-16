@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from "react-router-dom";
 import { MdOutlineReply } from "react-icons/md";
 
 const Reply = ({ comment, }) => {
@@ -62,6 +63,9 @@ const Reply = ({ comment, }) => {
                                 <button className='btn btn-sm btn-primary' disabled={replyText.length >= 3 ? false : true} onClick={()=> handleReply(comment._id)}>Reply</button>
                             </div>
 
+                        }
+                        {
+                            comment.hasReply ? <Link className="ml-5" style={{fontSize: "12px"}} to={`#`} >View Replies</Link> : ""
                         }
                     </div>
                 </div>
