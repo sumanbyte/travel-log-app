@@ -223,14 +223,14 @@ const replyPost = async (req, res) => {
 
 const getRepliesForAComment = async (req, res) => {
     const commentId = req.params.id;
-
+    
     const isValid = mongoose.Types.ObjectId.isValid(commentId);
 
     if(!isValid){
         return res.status(400).json({status: false, message: "provide a valid commentid"})
     }
 
-    const replies = await Reply.findOne({commentId});
+    const replies = await Reply.find({commentId});
 
     if(!replies){
         return res.status(400).json({status: false, message: "Reply doesn't exists"})
@@ -242,6 +242,7 @@ const getRepliesForAComment = async (req, res) => {
 
 // get comments for a given post id function
 const getCommentsForAPost = async (req, res) => {
+
     const postID = req.params.id;
     const isValidID = mongoose.Types.ObjectId.isValid(postID);
 
@@ -256,7 +257,6 @@ const getCommentsForAPost = async (req, res) => {
                 return res.status(200).send(comments)
             }
         })
-
     } else {
         return res.send('invalid id');
     }
@@ -272,5 +272,6 @@ module.exports = {
     likePost,
     commentPost,
     replyPost,
+    getRepliesForAComment,
     getCommentsForAPost
 }

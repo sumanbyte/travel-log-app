@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createPost, editPost, deletePost, getPost, getAllPost, allPosts, likePost, commentPost, getCommentsForAPost, replyPost } = require('../controllers/posts')
+const { createPost, editPost, deletePost, getPost, getAllPost, allPosts, likePost, commentPost, getCommentsForAPost, replyPost, getRepliesForAComment } = require('../controllers/posts')
 const fetchUser = require('../middleware/fetchUser')
 // create, edit, delete,getposts endpoints
 router.route('/getAllPost').get(fetchUser, getAllPost)
@@ -13,6 +13,7 @@ router.route('/likepost/:id').get(fetchUser, likePost)
 router.route('/commentpost/:id').post(fetchUser, commentPost)
 //Reply for the post
 router.route('/replycomment/:id').post(fetchUser, replyPost)
+router.route('/getreplies/:id').get(getRepliesForAComment)
 // get comments for a given post id route
 router.route('/getcomments/:id').get(getCommentsForAPost)
 

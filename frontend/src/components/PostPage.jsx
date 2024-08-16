@@ -33,8 +33,11 @@ const PostPage = () => {
   const fetchComments = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getcomments/${postID}`);
     const data = await response.json();
+    
     setAllComments(data);
   }, [postID]);
+
+  console.log(allComments)
 
   useEffect(() => {
     fetchPost();
