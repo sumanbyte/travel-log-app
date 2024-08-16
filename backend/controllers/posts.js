@@ -191,52 +191,59 @@ const commentPost = async (req, res) => {
 }
 
 const replyPost = async (req, res) => {
-    const isValidID = mongoose.Types.ObjectId.isValid(req.params.id);
+    try {
 
-    if (!isValidID) {
-        return res.status(400).json({ status: false, message: "invalid comment id" })
+        const isValidID = mongoose.Types.ObjectId.isValid(req.params.id);
+
+        if (!isValidID) {
+            return res.status(400).json({ status: false, message: "invalid comment id" })
+        }
+
+        const { reply } = req.body;
+
+        if (!reply) {
+            return res.status(400).json({ status: false, message: "Reply text is required." })
+        }
+
+        const comment = await Comment.findOne({ _id: req.params.id });
+
+        if (!comment) {
+            return res.status(400).json({ status: false, message: "Comment doesn't exists." })
+        }
+
+        const replyCreate = await Reply.create({ commentId: req.params.id, text: reply });
+
+        if (!replyCreate) {
+            return res.status(400).json({ status: false, message: "failed to create a reply." });
+        }
+
+        await Comment.updateOne({ _id: comment._id }, { hasReply: true })
+
+        return res.status(201).json({ status: true, message: "Reply creation success" });
+    } catch (e) {
+        console.log(e)
+        return res.status(201).json({ status: false, message: "Reply creation failed" });
+
     }
-
-    const { reply } = req.body;
-
-    if(!reply){
-        return res.status(400).json({status: false, message: "Reply text is required."})
-    }
-
-    const comment = await Comment.findOne({_id: req.params.id});
-
-    if(!comment){
-        return res.status(400).json({status: false, message: "Comment doesn't exists."})
-    }
-
-    const replyCreate = await Reply.create({ commentId: req.params.id, text: reply });
-
-    if (!replyCreate) {
-        return res.status(400).json({ status: false, message: "failed to create a reply." });
-    }
-
-    await Comment.updateOne({commentId: comment._id}, {hasReply: true})
-
-    return res.status(201).json({ status: true, message: "Reply creation success" });
 
 }
 
 const getRepliesForAComment = async (req, res) => {
     const commentId = req.params.id;
-    
+
     const isValid = mongoose.Types.ObjectId.isValid(commentId);
 
-    if(!isValid){
-        return res.status(400).json({status: false, message: "provide a valid commentid"})
+    if (!isValid) {
+        return res.status(400).json({ status: false, message: "provide a valid commentid" })
     }
 
-    const replies = await Reply.find({commentId});
+    const replies = await Reply.find({ commentId });
 
-    if(!replies){
-        return res.status(400).json({status: false, message: "Reply doesn't exists"})
+    if (!replies) {
+        return res.status(400).json({ status: false, message: "Reply doesn't exists" })
     }
 
-    return res.status(200).json({status: true, replies});
+    return res.status(200).json({ status: true, replies });
 
 }
 

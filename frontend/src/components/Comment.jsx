@@ -28,17 +28,19 @@ const Reply = ({ comment, }) => {
     }
 
     const fetchReplies = async (commentid) => {
+        console.log(commentid)
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getreplies/${commentid}`, {
             headers: {
                 'Content-Type': "application/json",
                 "auth-token": localStorage.getItem("auth-token")
             },
+            method: "GET"
         });
 
         const data = await response.json();
+        
 
         setReplies(data.replies)
-        console.log(data)
     }
 
     return (
