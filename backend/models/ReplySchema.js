@@ -7,6 +7,11 @@ const replySchema = new Schema({
         ref: "Comment",
         required: true
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User",
+        required: true
+    },
     text: {
         type: String,
         required: true

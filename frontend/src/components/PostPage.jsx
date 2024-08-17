@@ -11,7 +11,7 @@ const PostPage = () => {
   const [post, setPost] = useState(null);
   const [comment, setComment] = useState('');
   const [allComments, setAllComments] = useState(null);
-  console.log(allComments);
+  // console.log(allComments);
   const navigate = useNavigate();
   const location = useLocation();
   const postID = location.pathname.split('/')[2];
@@ -22,7 +22,7 @@ const PostPage = () => {
   const fetchPost = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getpost/${postID}`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.post) {
       setPost(data.post);
     } else {
@@ -37,7 +37,7 @@ const PostPage = () => {
     setAllComments(data);
   }, [postID]);
 
-  console.log(allComments)
+  // console.log(allComments)
 
   useEffect(() => {
     fetchPost();

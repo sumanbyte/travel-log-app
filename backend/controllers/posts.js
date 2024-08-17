@@ -211,18 +211,36 @@ const replyPost = async (req, res) => {
             return res.status(400).json({ status: false, message: "Comment doesn't exists." })
         }
 
-        const replyCreate = await Reply.create({ commentId: req.params.id, text: reply });
+        const replyCreate = await Reply.create({ commentId: req.params.id, userId: req.user.id, text: reply });
 
         if (!replyCreate) {
             return res.status(400).json({ status: false, message: "failed to create a reply." });
         }
 
-        await Comment.updateOne({ _id: comment._id }, { hasReply: true })
+        await Comment.updateOne({ _id: comment._id }, { hasReply: true });
 
-        return res.status(201).json({ status: true, message: "Reply creation success" });
+        Reply.findOne({commentId: comment._id}).populate({
+            path: "userId",
+            select: "-password"
+        }).exec((err, result) => {
+            if(err){
+                console.log(err)
+                return res.status(400).json({
+                    status: false,
+                    message: 'Cannot create a reply from findone populate.'
+                })
+            }else {
+                // Access the populated user's username for each post
+                return res.status(200).json({
+                    status: true,
+                    message: 'Reply creation success',
+                    reply: result
+                })
+            }
+        })
     } catch (e) {
         console.log(e)
-        return res.status(201).json({ status: false, message: "Reply creation failed" });
+        return res.status(400).json({ status: false, message: "Reply creation failed" });
 
     }
 
@@ -237,13 +255,31 @@ const getRepliesForAComment = async (req, res) => {
         return res.status(400).json({ status: false, message: "provide a valid commentid" })
     }
 
-    const replies = await Reply.find({ commentId });
+    Reply.find({ commentId }).populate({
+        path: "userId",
+        select: "-password"
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(400).json({
+                status: false,
+                message: 'Cannot get any replies.'
+            })
+            // Handle the error
+        } else {
+            // Access the populated user's username for each post
+            return res.status(200).json({
+                status: true,
+                message: 'Got all replies successfully',
+                replies: result
+            })
+        }
+    })
 
-    if (!replies) {
-        return res.status(400).json({ status: false, message: "Reply doesn't exists" })
-    }
+    // if (!replies) {
+    //     return res.status(400).json({ status: false, message: "Reply doesn't exists" })
+    // }
 
-    return res.status(200).json({ status: true, replies });
+    // return res.status(200).json({ status: true, replies });
 
 }
 
