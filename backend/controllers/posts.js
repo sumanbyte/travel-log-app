@@ -218,8 +218,7 @@ const replyPost = async (req, res) => {
         }
 
         await Comment.updateOne({ _id: comment._id }, { hasReply: true });
-
-        Reply.findOne({commentId: comment._id}).populate({
+        Reply.findOne({_id: replyCreate._id}).populate({
             path: "userId",
             select: "-password"
         }).exec((err, result) => {

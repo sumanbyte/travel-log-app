@@ -6,6 +6,7 @@ import useMode from "../hooks/useMode";
 const Comment = ({ comment }) => {
     const [reply, setReply] = useState(false);
     const [replyText, setReplyText] = useState("");
+    const [loading, setLoading] = useState(false);
     const { darkMode } = useMode();
     const [replies, setReplies] = useState(() => {
         return [];
@@ -33,20 +34,30 @@ const Comment = ({ comment }) => {
     };
 
     const fetchReplies = async (commentid) => {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getreplies/${commentid}`, {
-            headers: {
-                'Content-Type': "application/json",
-                "auth-token": localStorage.getItem("auth-token")
-            },
-            method: "GET"
-        });
+        // if (replies.length < 0) {
 
-        const data = await response.json();
-        setReplies(data.replies);
-        setToggle(!toggle); // Toggle visibility after fetching
+        try {
+            setLoading(true);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getreplies/${commentid}`, {
+                headers: {
+                    'Content-Type': "application/json",
+                    "auth-token": localStorage.getItem("auth-token")
+                },
+                method: "GET"
+            });
+
+            const data = await response.json();
+            setReplies(data.replies);
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
+            setToggle(!toggle); // Toggle visibility after fetching
+        }
+        // }
     };
 
-
+    console.log(comment)
 
 
     return (
@@ -104,14 +115,15 @@ const Comment = ({ comment }) => {
                                 className="ml-5"
                                 style={{ fontSize: "12px", color: darkMode ? "white" : "black" }}
                                 to="#"
-                                onClick={() => {fetchReplies(comment._id)
+                                onClick={() => {
+                                    fetchReplies(comment._id)
                                     setToggle(!toggle);
                                 }}
                             >
-                                {toggle ? "Hide Replies" : "View Replies"}
+                                {!loading && !toggle ? "Show Replies" : "Hide Replies"}
                             </Link>
                         )}
-                        {!toggle && replies && replies.map(reply => (
+                        {loading ? <p>Loading....</p> : toggle && replies && replies.length > 0 && replies.map(reply => (
                             <div key={reply._id} className="d-flex flex-start mt-4 font-open" style={{ marginLeft: "50px" }}>
                                 <img
                                     className="rounded-circle shadow-1-strong me-3"
@@ -121,8 +133,8 @@ const Comment = ({ comment }) => {
                                     height="60"
                                 />
                                 <div style={{ width: '100%' }}>
-                                    <h6 className="fw-bold mb-1">{reply.userId.name || ""}</h6>
-                                    length        <div
+                                    <h6 className="fw-bold mb-1">{reply.userId.name}</h6>
+                                    <div
                                         className="d-flex align-items-center justify-content-between mb-1"
                                         style={{ width: '100%' }}
                                     >
