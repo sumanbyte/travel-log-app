@@ -111,7 +111,7 @@ const Comment = ({ comment }) => {
                             </div>
                         )}
                         {comment.hasReply && (
-                            <Link
+                           !loading && !toggle ? <Link
                                 className="ml-5"
                                 style={{ fontSize: "12px", color: darkMode ? "white" : "black" }}
                                 to="#"
@@ -120,8 +120,18 @@ const Comment = ({ comment }) => {
                                     setToggle(!toggle);
                                 }}
                             >
-                                {!loading && !toggle ? "Show Replies" : "Hide Replies"}
+                                Show Replies
+                            </Link> : <Link
+                                className="ml-5"
+                                style={{ fontSize: "12px", color: darkMode ? "white" : "black" }}
+                                to="#"
+                                onClick={() => {
+                                    setToggle(!toggle);
+                                }}
+                            >
+                                Hide Replies
                             </Link>
+
                         )}
                         {loading ? <p>Loading....</p> : toggle && replies && replies.length > 0 && replies.map(reply => (
                             <div key={reply._id} className="d-flex flex-start mt-4 font-open" style={{ marginLeft: "50px" }}>
