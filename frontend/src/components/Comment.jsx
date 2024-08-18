@@ -4,6 +4,7 @@ import { MdOutlineReply } from "react-icons/md";
 import useMode from "../hooks/useMode";
 
 const Comment = ({ comment }) => {
+    const [hasReply, setHasReply] = useState(comment.hasReply || false);
     const [reply, setReply] = useState(false);
     const [replyText, setReplyText] = useState("");
     const [loading, setLoading] = useState(false);
@@ -30,8 +31,10 @@ const Comment = ({ comment }) => {
             // Update the replies state directly with the new reply
             setReplies(prevReplies => [...prevReplies, data.reply]);
             setReplyText("");
+            setHasReply(true);
         }
     };
+
 
     const fetchReplies = async (commentid) => {
         // if (replies.length < 0) {
@@ -110,7 +113,7 @@ const Comment = ({ comment }) => {
                                 </button>
                             </div>
                         )}
-                        {comment.hasReply && (
+                        {hasReply && (
                            !loading && !toggle ? <Link
                                 className="ml-5"
                                 style={{ fontSize: "12px", color: darkMode ? "white" : "black" }}

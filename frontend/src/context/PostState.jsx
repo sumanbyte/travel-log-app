@@ -1,5 +1,5 @@
 import PostContext from "./postContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const PostState = (props) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -96,10 +96,7 @@ const PostState = (props) => {
         }
     }
 
-    useEffect(() => {
-        allUserPosts();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    
 
     return (
         <PostContext.Provider value={{ individualPost, getPost, allUserPosts, allPosts, userPosts, loading, createPost, getAllPost, editPost, deletePost, error }}>

@@ -1,16 +1,21 @@
 import Loading from '../assets/loading-component/Loading';
 import usePost from '../hooks/usePost';
 import useMode from '../hooks/useMode';
-
+import { useEffect } from 'react';
 
 const Posts = () => {
-  const { allPosts, loading, error } = usePost();
+  const { allPosts, loading, error, allUserPosts } = usePost();
   const { darkMode } = useMode();
 
   console.log("i am running from Posts component")
 
+  useEffect(() => {
+    allUserPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{minHeight:"100vh"}}>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ minHeight: "100vh" }}>
       <div className={`pt-3 container`}>
         <div className="container-fluid py-3 px-0">
           <h1 className="display-5 fw-bold font-owsald">View All Posts</h1>
