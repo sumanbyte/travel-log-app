@@ -92,7 +92,7 @@ const PostPage = () => {
   return (
     <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
       <div className="pt-5 container font-open">
-        <div className="container-fluid py-5">
+        <div className="py-5">
           {post ? (
             <>
               <div className="d-flex flex-wrap justify-content-between align-items-center">
@@ -137,7 +137,7 @@ const PostPage = () => {
                 <div className="col-md-12">
                   <div className="col-md-12">
                     <div className="card text-dark">
-                      <div className={`card-body p-4 ${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
+                      <div className={`card-body comments-div ${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
                         <h4 className="mb-0 font-owsald">Recent comments</h4>
                         <p className="fw-light mb-4 pb-2">Latest Comments section by users</p>
                         {!allComments ? (
@@ -146,7 +146,7 @@ const PostPage = () => {
                           <h1>No comments found for this post.</h1>
                         ) : (
                           allComments.map((comment) => (
-                            <div key={comment._id}>
+                            <div key={comment._id} className='single-comment'>
                               <hr />
                               <Comment comment={comment} />
                               <hr />

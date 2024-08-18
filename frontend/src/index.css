@@ -108,7 +108,23 @@ nav {
   transition: all .55s ease-in-out;
 }
 
+.single-comment span {
+  font-size: 13px;
+}
 
+.single-comment p {
+  font-size: 15px;
+}
+
+
+
+.comments-div {
+  padding: 1.5rem !important;
+}
+
+.custom-comment-img{
+  margin-right: 10px;
+}
 
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
@@ -168,6 +184,24 @@ nav {
   .btn-responsive {
     padding: 0.25rem 0.5rem !important; /* btn-sm equivalent padding */
     font-size: 0.875rem !important; /* btn-sm equivalent font-size */
+  }
+  .single-comment img {
+    width: 30px;
+    height: 30px;
+  }
+  .single-comment span {
+    font-size: 11px;
+  }
+  
+  .single-comment p {
+    font-size: 13px;
+  }
+
+  .comments-div{
+    padding: 1rem .5rem !important;
+  }
+  .custom-comment-img{
+    margin: 0 2px;
   }
 }
 

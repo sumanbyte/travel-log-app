@@ -64,7 +64,7 @@ const Comment = ({ comment }) => {
         <>
             <div className="d-flex flex-start mt-4 font-open">
                 <img
-                    className="rounded-circle shadow-1-strong me-3"
+                    className="rounded-circle shadow-1-strong custom-comment-img"
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
                     alt="avatar"
                     width="60"
@@ -72,13 +72,13 @@ const Comment = ({ comment }) => {
                 />
                 <div style={{ width: '100%' }}>
                     <div
-                        className="d-flex align-items-center justify-content-between mb-1"
+                        className="d-flex align-items-center justify-content-between flex-wrap mb-1"
                         style={{ width: '100%' }}
                     >
-                        <span className="badge bg-primary" style={{ fontSize: '13px' }}>
+                        <span className="badge bg-primary" >
                             {comment.userID.name}
                         </span>
-                        <p className="mb-0 mx-2" style={{ fontSize: '15px' }}>
+                        <p className="mb-0 mx-2">
                             {new Date(comment.createdAt).toDateString()}
                         </p>
                     </div>
@@ -134,26 +134,22 @@ const Comment = ({ comment }) => {
 
                         )}
                         {loading ? <p>Loading....</p> : toggle && replies && replies.length > 0 && replies.map(reply => (
-                            <div key={reply._id} className="d-flex flex-start mt-4 font-open" style={{ marginLeft: "50px" }}>
+                            <div key={reply._id} className="d-flex flex-start mt-4 font-open">
                                 <img
-                                    className="rounded-circle shadow-1-strong me-3"
+                                    className="rounded-circle shadow-1-strong custom-comment-img"
                                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
                                     alt="avatar"
                                     width="60"
                                     height="60"
                                 />
                                 <div style={{ width: '100%' }}>
-                                    <h6 className="fw-bold mb-1">{reply.userId.name}</h6>
                                     <div
                                         className="d-flex align-items-center justify-content-between mb-1"
                                         style={{ width: '100%' }}
                                     >
-                                        <span className="badge bg-primary" style={{ fontSize: '13px' }}>
-                                            {reply.userId.name || ""}
+                                        <span className="badge bg-primary" >
+                                            {reply.userId.name}
                                         </span>
-                                        {/* <p className="mb-0 mx-2" style={{ fontSize: '15px' }}>
-                                                                {new Date(reply.createdAt).toDateString()}
-                                                            </p> */}
                                     </div>
                                     <div className="d-flex flex-column">
                                         <div className='d-flex align-items-center'>
