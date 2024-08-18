@@ -97,10 +97,10 @@ const PostPage = () => {
             <>
               <div className="d-flex flex-wrap justify-content-between align-items-center">
                 <p>
-                  <b>Posted On:</b> {new Date(post.createdAt).toLocaleDateString()}{' '}
-                  {new Date(post.createdAt).toLocaleTimeString()}
+                  Author: {post.userID.name}
+                  
                 </p>
-                <p>Posted by {post.userID.name}</p>
+                <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes()} </p>
               </div>
               <h1 className="display-6 fw-bold font-owsald">{post.title}</h1>
               <p className="col-md-12 fs-5">{post.description}</p>
@@ -109,8 +109,7 @@ const PostPage = () => {
               </button>
               {post.createdAt !== post.updatedAt && (
                 <p className="posted-on text-end">
-                  Last edited on {new Date(post.updatedAt).toLocaleDateString()}{' '}
-                  {new Date(post.updatedAt).toLocaleTimeString()}
+                Edited: {new Date(post.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.updatedAt).getHours()}:{new Date(post.updatedAt).getMinutes()} 
                 </p>
               )}
               <h2 className="display-7 fw-bold mt-5 font-owsald">Leave a comment</h2>

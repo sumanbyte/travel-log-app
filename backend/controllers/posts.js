@@ -71,21 +71,53 @@ const editPost = async (req, res) => {
 const deletePost = async (req, res) => {
     const { id } = req.params
     const isValidID = mongoose.Types.ObjectId.isValid(id)
-
-    if (isValidID) {
-        const post = await Post.findById(id);
-        if (post.userID.toString() !== req.user.id) {
-            return res.status(401).json({ message: "Not Allowed" });
-        }
-        const toBeDeleted = await Post.findByIdAndDelete(id)
-        if (!toBeDeleted) {
-            return res.json({ message: 'Nothing to delete' })
-        }
-        return res.json({ message: 'Your Post has been deleted', toBeDeleted })
-    } else {
-        return res.json({ message: 'The thing you are trying to delete does not exists' })
+    if (!isValidID) {
+        return res.status(400).json({ message: 'Invalid ID' });
     }
 
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+
+    try {
+        const post = await Post.findById(id).session(session);
+
+        if (!post) {
+            await session.abortTransaction();
+            session.endSession();
+            return res.status(404).json({ message: "Post not found" })
+        }
+
+
+        if (post.userID.toString() !== req.user.id) {
+            await session.abortTransaction();
+            session.endSession();
+            return res.status(401).json({ message: "Not Allowed" });
+        }
+
+
+        const comments = await Comment.find({ postID: id }).session(session);
+        const commentIds = comments.map(comment => comment._id);
+
+        await Comment.deleteMany({ postID: id }).session(session);
+
+        await Reply.deleteMany({ commentId: { $in: commentIds } }).session(session);
+
+        await Post.deleteOne({ _id: id }).session(session);
+
+        await session.commitTransaction();
+        session.endSession();
+
+        return res.json({ message: 'Your Post has been deleted', toBeDeleted })
+
+    } catch (error) {
+        // Abort the transaction only if an error occurs before committing
+        if (session.inTransaction()) {
+            await session.abortTransaction();
+        }
+        session.endSession();
+        return res.status(500).json({ message: 'An error occurred during the deletion process', error });
+    }
 
 }
 const getPost = async (req, res) => {
@@ -218,17 +250,17 @@ const replyPost = async (req, res) => {
         }
 
         await Comment.updateOne({ _id: comment._id }, { hasReply: true });
-        Reply.findOne({_id: replyCreate._id}).populate({
+        Reply.findOne({ _id: replyCreate._id }).populate({
             path: "userId",
             select: "-password"
         }).exec((err, result) => {
-            if(err){
+            if (err) {
                 console.log(err)
                 return res.status(400).json({
                     status: false,
                     message: 'Cannot create a reply from findone populate.'
                 })
-            }else {
+            } else {
                 // Access the populated user's username for each post
                 return res.status(200).json({
                     status: true,
