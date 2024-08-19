@@ -125,6 +125,14 @@ nav {
   margin-right: 10px;
 }
 
+.postcard-component .card-title{
+  font-size: 35px !important;
+}
+
+.postcard-component .postcard-actions svg{
+  font-size: 20px;
+}
+
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
     margin: 20px 0;
@@ -154,6 +162,17 @@ nav {
   .mode-btn{
     margin-left: 0px;
     margin-top: 15px;
+  }
+
+  .posted-on{
+    font-size: 12px;
+  }
+  .postcard-component .card-title{
+    font-size: 25px !important;
+  }
+
+  .postcard-component .postcard-actions svg{
+    font-size: 15px;
   }
 }
 

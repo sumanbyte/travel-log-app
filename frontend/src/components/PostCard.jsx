@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import usePost from '../hooks/usePost';
 import useAlert from '../hooks/useAlert';
 import useMode from '../hooks/useMode';
+import { BsThreeDotsVertical } from "react-icons/bs";
+
 
 
 const PostCard = ({ data }) => {
@@ -66,26 +68,22 @@ const PostCard = ({ data }) => {
 
   return (
     <div className='py-2'>   
-       <div className="card">
+       <div className="card postcard-component">
       <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition card-body`}>
         {!editClicked ? (
           <>
-            <p>
-              <b>Posted On:</b> {new Date(data.createdAt).toLocaleDateString()}{' '}
-              {new Date(data.createdAt).toLocaleTimeString()}
+          <div className='d-flex postcard-actions justify-content-between align-items-center my-0 mb-3'>
+            <p className='posted-on my-0'>
+            {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes()}
             </p>
+            <BsThreeDotsVertical />
+          </div>
             <h5 className="card-title">{data.title}</h5>
             <p className="card-text">{data.description}</p>
-            <button className="btn btn-success btn-sm mx-1" onClick={handleEditClick}>
-              Edit
-            </button>
-            <button className="btn btn-danger btn-sm" onClick={handleDeleteClick}>
-              Delete
-            </button>
+
             {data.createdAt !== data.updatedAt && (
-              <p className="posted-on text-end">
-                Last edited on {new Date(data.updatedAt).toLocaleDateString()}{' '}
-                {new Date(data.updatedAt).toLocaleTimeString()}
+              <p className="posted-on my-0 mt-2 text-end">
+                Edited on {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes()}
               </p>
             )}
           </>
