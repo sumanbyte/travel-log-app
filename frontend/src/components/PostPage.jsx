@@ -90,7 +90,7 @@ const PostPage = () => {
   };
 
   return (
-    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{minHeight: "100vh"}}>
       <div className="pt-5 container font-open">
         <div className="py-5">
           {post ? (

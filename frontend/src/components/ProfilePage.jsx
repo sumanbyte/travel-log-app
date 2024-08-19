@@ -7,8 +7,8 @@ import useMode from '../hooks/useMode';
 
 function ProfilePage() {
 
-  const { user, getUser, loading } = useAuthentication();
-  const {darkMode} = useMode();
+  const { user, getUser, loading, error } = useAuthentication();
+  const { darkMode } = useMode();
   // console.log(user)
 
   useEffect(() => {
@@ -21,26 +21,27 @@ function ProfilePage() {
   // console.log("i am running from profilepage component")
 
   return (
-    <div className={`py-2 ${darkMode ? "dark-mode": ""} dark-mode-transition`} style={{minHeight: "100vh"}}>
-    <Card style={{border: "none"}}>
-      {
-        loading ? <>
-          <Loading />
-        </>
-          : !user ?
-            <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>Some error occured</Card.Body> :
-            <div  className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>
-              <h2 className='mx-3 my-2 font-owsald'>Your Details</h2>
-              <Card.Body >
-                <Card.Title>Name: {user.name}</Card.Title>
-                <Card.Title>Email: {user.email}</Card.Title>
-                <ModalTMP name={user.name} />
-              </Card.Body>
-            </div>
-      }
+    <>
+      <Card className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ border: "none", minHeight: "100vh" }}>
+        {
+          loading ? <>
+            <Loading />
+          </>
+            : error ?
+              <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>{error}</Card.Body> : user &&
+              <>
+                <h2 className={`${darkMode ? "dark-mode": "" } dark-mode-transition px-3 py-2 my-0 font-owsald`}>Your Details</h2>
+                <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>
+                  <Card.Title>Name: {user.name}</Card.Title>
+                  <Card.Title>Email: {user.email}</Card.Title>
+                  <ModalTMP name={user.name} />
+                </Card.Body>
+              </>
+        }
 
-    </Card>
-    </div>
+
+      </Card>
+    </>
   );
 }
 
