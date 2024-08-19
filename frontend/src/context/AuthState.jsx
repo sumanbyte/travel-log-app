@@ -21,7 +21,7 @@ const AuthState = ({ children }) => {
     }finally{
         setLoading(false);
     }
-    console.log(loading)
+    // console.log(loading)
     }
 
     return <AuthContext.Provider value={{user, getUser, loading}}>

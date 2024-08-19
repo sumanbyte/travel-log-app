@@ -64,8 +64,8 @@ export const Discuss = () => {
   return (
     <div className={`${darkMode ? "dark-mode": ""} dark-mode-transition`} style={{minHeight: "calc(100vh - 61px)"}}>
       <div className="container pt-4">
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
+        <div className="mb-2">
+          <label htmlFor="title" className="form-label mb-1">
             Title
           </label>
           <input
@@ -78,8 +78,8 @@ export const Discuss = () => {
           />
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+        <div className="mb-4">
+          <label htmlFor="description" className="form-label mb-1">
             Description
           </label>
           <textarea
@@ -93,10 +93,10 @@ export const Discuss = () => {
           ></textarea>
           <button
             disabled={userData.title.length <= 3 || userData.description.length <= 3}
-            className="btn btn-primary my-1 text-right"
+            className="btn btn-primary btn-responsive mt-2 text-right"
             onClick={handleClick}
           >
-            Create Post
+            Create Post 
           </button>
         </div>
 

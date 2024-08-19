@@ -92,7 +92,7 @@ nav {
 }
 
 .dark-mode{
-  background-color: rgb(33 37 41);
+  background-color: rgb(33 37 41) !important;
   color: white !important;
 }
 
@@ -125,6 +125,10 @@ nav {
   margin-right: 10px;
 }
 
+
+.postcard-component{
+  border-radius: 20px;
+}
 .postcard-component .card-title{
   font-size: 35px !important;
 }
@@ -132,6 +136,33 @@ nav {
 .postcard-component .postcard-actions svg{
   font-size: 20px;
 }
+
+.postcard-component .postcard-actions-list p{
+  font-size: 15px;
+  padding: 3px 10px;
+  margin: 0;
+  transition: .3s all ease-in-out;
+}
+
+.postcard-component .postcard-actions-list p:hover{
+  background-color: rgb(211, 211, 247);
+  cursor: pointer;
+}
+
+.postcard-component .postcard-actions-list{
+  height: 60px;
+  width: 80px;
+  position: absolute;
+  right: 40px;
+  top: 16px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.card-title.h5{
+  font-size: 16px;
+}
+
 
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
@@ -220,6 +251,9 @@ nav {
   }
   .custom-comment-img{
     margin: 0 2px;
+  }
+  .card-title.h5{
+    font-size: 13px;
   }
 }
 

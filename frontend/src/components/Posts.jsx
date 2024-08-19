@@ -17,10 +17,7 @@ const Posts = () => {
   return (
     <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ minHeight: "100vh" }}>
       <div className={`pt-3 container`}>
-        <div className="container-fluid py-3 px-0">
-          <h1 className="display-5 fw-bold font-owsald">View All Posts</h1>
-          <p className="col-md-8 fs-6">You can like, comment other user posts from here.</p>
-        </div>
+        
         {
           loading ?
             <Loading />
