@@ -22,7 +22,7 @@ function ProfilePage() {
 
   return (
     <>
-      <Card className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ border: "none", minHeight: "100vh" }}>
+      <Card className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ border: "none", minHeight: "100vh", borderRadius: "0px" }}>
         {
           loading ? <>
             <Loading />
@@ -30,8 +30,8 @@ function ProfilePage() {
             : error ?
               <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>{error}</Card.Body> : user &&
               <>
-                <h2 className={`${darkMode ? "dark-mode": "" } dark-mode-transition px-3 py-2 my-0 font-owsald`}>Your Details</h2>
-                <Card.Body className={`${darkMode ? "dark-mode" : ""}  dark-mode-transition`}>
+                <Card.Body>
+                  <h2 className={`mb-4 font-owsald`}>Your Details</h2>
                   <Card.Title>Name: {user.name}</Card.Title>
                   <Card.Title>Email: {user.email}</Card.Title>
                   <ModalTMP name={user.name} />
