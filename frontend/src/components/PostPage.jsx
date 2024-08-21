@@ -98,7 +98,6 @@ const PostPage = () => {
               <div className="d-flex flex-wrap justify-content-between align-items-center">
                 <p>
                   Author: {post.userID.name}
-                  
                 </p>
                 <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes()} </p>
               </div>
@@ -136,7 +135,7 @@ const PostPage = () => {
                 <div className="col-md-12">
                   <div className="col-md-12">
                     <div className="card text-dark">
-                      <div className={`card-body comments-div ${darkMode ? "dark-mode" : ""} dark-mode-transition`}>
+                      <div className={`card-body comments-div ${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{borderRadius: "5px"}}>
                         <h4 className="mb-0 font-owsald">Recent comments</h4>
                         <p className="fw-light mb-4 pb-2">Latest Comments section by users</p>
                         {!allComments ? (

@@ -82,7 +82,7 @@ const PostCard = ({ data }) => {
             <p onClick={handleDeleteClick}>Delete</p>
           </div>
         }
-        <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition card-body`}>
+        <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition card-body`} style={{borderRadius: "5px"}}>
           {!editClicked ? (
             <>
               <div className='d-flex postcard-actions justify-content-between align-items-center my-0 mb-3'>
