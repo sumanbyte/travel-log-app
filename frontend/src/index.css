@@ -163,6 +163,10 @@ nav {
   font-size: 16px;
 }
 
+.posted-on{
+  font-size: 12px;
+}
+
 
 @media screen and (max-width: 991px) {
   #navbarSupportedContent {
@@ -195,9 +199,7 @@ nav {
     margin-top: 15px;
   }
 
-  .posted-on{
-    font-size: 12px;
-  }
+ 
   .postcard-component .card-title{
     font-size: 25px !important;
   }
