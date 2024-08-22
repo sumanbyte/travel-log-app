@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import usePost from '../hooks/usePost';
 import useAlert from '../hooks/useAlert';
 import useMode from '../hooks/useMode';
@@ -8,6 +8,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 const PostCard = ({ data }) => {
   const { darkMode } = useMode();
+  const postCardRef = useRef(null);
   const [showActions, setShowActions] = useState(false);
   const { setShow, setAlert } = useAlert();
   const [editClicked, setEditClicked] = useState(false);
@@ -69,11 +70,28 @@ const PostCard = ({ data }) => {
     [editHandleClick]
   );
 
+    // Detect clicks outside of the component
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (postCardRef.current && !postCardRef.current.contains(event.target)) {
+          setShowActions(false);
+        }
+      };
+  
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside);
+      
+      return () => {
+        // Unbind the event listener on cleanup
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [postCardRef]);
+
   console.log('i am running from postcard component');
 
   return (
     <div className='py-2'>
-      <div className="card postcard-component position-relative">
+      <div className={`card postcard-component position-relative`} ref={postCardRef}>
 
         {
           showActions &&
