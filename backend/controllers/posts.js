@@ -12,6 +12,10 @@ const createPost = async (req, res) => {
         return res.status(400).json({ message: 'Title or Description cannot be blank' })
     }
 
+    if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(req.body.map)){
+        return res.status(400).json({message: "Please provide a valid map link"})
+    }
+
     const userID = req.user.id;
 
     const user = await User.findById(userID);
@@ -24,13 +28,12 @@ const createPost = async (req, res) => {
     const post = await Post.create({
         title: req.body.title,
         description: req.body.description,
-        userName: user.name,
+        map: req.body.map,
         userID,
         likes: 0,
     })
 
     if (post) {
-
         return res.status(200).json({ message: 'Posted Successfully', post })
     } else {
         return res.status(400).json({ message: 'Cannot post at the moment' })
