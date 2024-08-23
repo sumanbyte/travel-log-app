@@ -42,10 +42,14 @@ const createPost = async (req, res) => {
 }
 
 const editPost = async (req, res) => {
-    const { title: newTitle, description: newDescription } = req.body
+    const { title: newTitle, description: newDescription, map: newMap } = req.body
     const id = req.params.id
     if (!newTitle || !newDescription) {
         return res.status(401).json({ message: 'Title or Description cannot be blank' })
+    }
+
+    if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(newMap)){
+        return res.status(400).json({message: "Please provide a valid map link"})
     }
 
     var valid = mongoose.Types.ObjectId.isValid(id);
