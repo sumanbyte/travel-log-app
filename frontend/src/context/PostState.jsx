@@ -35,7 +35,7 @@ const PostState = (props) => {
         }
     }
 
-    const createPost = async ({ title, description }) => {
+    const createPost = async ({ title, description, map }) => {
         setLoading(true)
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/createpost`, {
             method: 'POST',
@@ -43,7 +43,7 @@ const PostState = (props) => {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('auth-token')
             },
-            body: JSON.stringify({ title, description })
+            body: JSON.stringify({ title, description, map })
         })
 
         console.log(await response.json())
@@ -52,14 +52,14 @@ const PostState = (props) => {
         getAllPost()
     }
 
-    const editPost = async (id, title, description) => {
+    const editPost = async (id, title, description, map) => {
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/editpost/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('auth-token')
             },
-            body: JSON.stringify({ title, description })
+            body: JSON.stringify({ title, description, map })
         })
         getAllPost()
 

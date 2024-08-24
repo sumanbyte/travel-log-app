@@ -7,9 +7,13 @@ import useMode from '../hooks/useMode';
 
 export const Discuss = () => {
   const { setShow, setAlert } = useAlert();
-  const [userData, setUserData] = useState({ title: '', description: '' });
-  const { getAllPost, userPosts, loading, error,  createPost } = usePost();
-  const {darkMode} = useMode();
+  const [userData, setUserData] = useState({ title: '', description: '', map: "" });
+  const { getAllPost, userPosts, loading, error, createPost } = usePost();
+  const { darkMode } = useMode();
+
+  const isValidMapLink = /^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(userData.map);
+
+  
 
   useEffect(() => {
     getAllPost();
@@ -62,7 +66,7 @@ export const Discuss = () => {
   // console.log(userPosts);
   console.log("i am running from discuss component")
   return (
-    <div className={`${darkMode ? "dark-mode": ""} dark-mode-transition`} style={{minHeight: "calc(100vh - 61px)"}}>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ minHeight: "calc(100vh - 61px)" }}>
       <div className="container pt-4">
         <div className="mb-2">
           <label htmlFor="title" className="form-label mb-1">
@@ -78,6 +82,7 @@ export const Discuss = () => {
           />
         </div>
 
+
         <div className="mb-4">
           <label htmlFor="description" className="form-label mb-1">
             Description
@@ -91,13 +96,36 @@ export const Discuss = () => {
             value={userData.description}
             onKeyDown={handleKeyDown}
           ></textarea>
+
+          <div className="mb-2 mt-2">
+            <label htmlFor="title" className="form-label mb-1">
+              Google Map Link
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="map"
+              name="map"
+              onChange={handleChange}
+              value={userData.map}
+            />
+          </div>
+          {
+            !isValidMapLink && userData.map && (
+              <div style={{color: darkMode ? "yellow": "red", marginTop: "10px"}}>
+                Please enter a valid google map link
+              </div>
+            )
+          }
+
           <button
-            disabled={userData.title.length <= 3 || userData.description.length <= 3}
+            disabled={userData.title.length <= 3 || userData.description.length <= 3 && isValidMapLink }
             className="btn btn-primary btn-responsive mt-2 text-right"
             onClick={handleClick}
           >
-            Create Post 
+            Share
           </button>
+          
         </div>
 
         <div className="post-card">
@@ -106,10 +134,10 @@ export const Discuss = () => {
               <Loading />
             </div>
           ) : error ? error :
-           userPosts && userPosts.length <= 0 ? (
+            userPosts && userPosts.length <= 0 ? (
               "You don't have any posts."
             ) : (
-             userPosts && userPosts.map((data) => <PostCard key={data._id} data={data} />)
+              userPosts && userPosts.map((data) => <PostCard key={data._id} data={data} />)
             )}
         </div>
       </div>

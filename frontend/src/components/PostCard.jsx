@@ -16,12 +16,15 @@ const PostCard = ({ data }) => {
     _id: data._id,
     title: data.title,
     description: data.description,
+    map: data.map
   });
+
+  const isValidMapLink = /^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(postState.map);
 
   const { editPost, deletePost } = usePost();
 
   const editHandleClick = useCallback(() => {
-    editPost(postState._id, postState.title, postState.description);
+    editPost(postState._id, postState.title, postState.description, postState.map);
     setShow(true);
     setAlert({
       color: 'success',
@@ -141,10 +144,28 @@ const PostCard = ({ data }) => {
                   onKeyDown={handleKeyDown}
                 ></textarea>
               </div>
-              <button className="btn btn-success btn-sm mx-1" onClick={editHandleClick}>
+              <div className='mb-3'>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="map"
+                  name="map"
+                  value={postState.map}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {
+                  !isValidMapLink && postState.map && (
+                    <div style={{color: darkMode ? "yellow": "red", marginBottom: "10px"}}>
+                      Please enter a valid google map link
+                    </div>
+                  )
+                }
+              
+              <button className="btn btn-success btn-sm inline-block" onClick={editHandleClick}>
                 Save Changes
               </button>
-              <button className="btn btn-danger btn-sm mx-1" onClick={handleGoBackClick}>
+              <button className="btn btn-danger btn-sm mx-1 inline-block" onClick={handleGoBackClick}>
                 Cancel
               </button>
             </div>
