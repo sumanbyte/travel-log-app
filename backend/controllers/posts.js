@@ -20,17 +20,26 @@ async function expandShortUrl(shortUrl) {
   }
   
   function convertGoogleMapUrl(fullUrl) {
-    const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
-    const match = fullUrl.match(regex);
+    // Extract coordinates from the URL
+    const coordRegex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+    const coordMatch = fullUrl.match(coordRegex);
   
-    if (match) {
-      const lat = match[1];
-      const lng = match[2];
+    // Extract the place name from the URL (if available)
+    const placeRegex = /\/place\/([^\/@]+)/;
+    const placeMatch = fullUrl.match(placeRegex);
+  
+    if (coordMatch) {
+      const lat = coordMatch[1];
+      const lng = coordMatch[2];
+      
+      // Use coordinates only to ensure accurate pin placement
       return `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
     } else {
       throw new Error('Invalid Google Maps URL format.');
     }
   }
+  
+    
   
   const createPost = async (req, res) => {
     console.log('Request body:', req.body);
@@ -108,6 +117,18 @@ const editPost = async (req, res) => {
     if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]/.test(newMap)){
         embedUrl = convertGoogleMapUrl(newMap);
     }
+
+    if (/^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(newMap)) {
+        console.log('Expanding short URL:', newMap);
+        embedUrl = await expandShortUrl(newMap);
+        console.log('Expanded URL:', embedUrl);
+      }
+    
+      if (/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]/.test(embedUrl)) {
+        console.log('Converting Google Maps URL to embed URL:', embedUrl);
+        embedUrl = convertGoogleMapUrl(embedUrl);
+        console.log('Converted Embed URL:', embedUrl);
+      }
 
     
 
