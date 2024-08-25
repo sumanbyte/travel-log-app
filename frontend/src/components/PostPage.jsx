@@ -9,6 +9,7 @@ import Comment from './Comment';
 const PostPage = () => {
   const { setShow, setAlert } = useAlert();
   const [post, setPost] = useState(null);
+  console.log(post)
   const [comment, setComment] = useState('');
   const [allComments, setAllComments] = useState(null);
   // console.log(allComments);
@@ -17,7 +18,8 @@ const PostPage = () => {
   const postID = location.pathname.split('/')[2];
   const decodedJWT = localStorage.getItem('auth-token') ? jwtDecode(localStorage.getItem('auth-token')) : null;
   const { darkMode } = useMode();
-  // const decodedJWT = "";
+
+  
 
   const fetchPost = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getpost/${postID}`);
@@ -33,7 +35,7 @@ const PostPage = () => {
   const fetchComments = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getcomments/${postID}`);
     const data = await response.json();
-    
+
     setAllComments(data);
   }, [postID]);
 
@@ -90,11 +92,13 @@ const PostPage = () => {
   };
 
   return (
-    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{minHeight: "100vh"}}>
+    <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ minHeight: "100vh" }}>
       <div className="pt-5 container font-open">
         <div className="py-5">
           {post ? (
             <>
+
+
               <div className="d-flex flex-wrap justify-content-between align-items-center">
                 <p>
                   Author: {post.userID.name}
@@ -103,14 +107,27 @@ const PostPage = () => {
               </div>
               <h1 className="display-6 fw-bold font-owsald">{post.title}</h1>
               <p className="col-md-12 fs-5">{post.description}</p>
+
+              <div style={{ width: "100%" }}>
+                <iframe
+                  width="100%"
+                  height="600"
+                  style={{ border: "0" }}
+                  src={post.mapEmbedUrl}
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+
               <button className="btn btn-primary btn-sm" onClick={handleLikePost}>
                 <span>{post.likes.length - 1} </span>Like
               </button>
               {post.createdAt !== post.updatedAt && (
                 <p className="posted-on text-end">
-                Edited: {new Date(post.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.updatedAt).getHours()}:{new Date(post.updatedAt).getMinutes()} 
+                  Edited: {new Date(post.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.updatedAt).getHours()}:{new Date(post.updatedAt).getMinutes()}
                 </p>
               )}
+
               <h2 className="display-7 fw-bold mt-5 font-owsald">Leave a comment</h2>
               {localStorage.getItem('auth-token') ? (
                 <div className="mb-3">
@@ -135,7 +152,7 @@ const PostPage = () => {
                 <div className="col-md-12">
                   <div className="col-md-12">
                     <div className="card text-dark">
-                      <div className={`card-body comments-div ${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{borderRadius: "5px"}}>
+                      <div className={`card-body comments-div ${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ borderRadius: "5px" }}>
                         <h4 className="mb-0 font-owsald">Recent comments</h4>
                         <p className="fw-light mb-4 pb-2">Latest Comments section by users</p>
                         {!allComments ? (

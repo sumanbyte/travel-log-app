@@ -14,6 +14,9 @@ const PostSchema = new Schema(
         map: {
             type: String,
         },
+        mapEmbedUrl: {
+            type: String,
+        },
         userID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

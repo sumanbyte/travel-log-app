@@ -4,42 +4,89 @@ const Comment = require('../models/CommentSchema');
 const Reply = require("../models/ReplySchema");
 const mongoose = require('mongoose')
 
-
-const createPost = async (req, res) => {
-
-
+async function expandShortUrl(shortUrl) {
+    try {
+      const response = await fetch(shortUrl, {
+        method: 'GET',
+        redirect: 'follow'
+      });
+  
+      console.log('Resolved URL:', response.url);
+      return response.url; // The final resolved URL
+    } catch (error) {
+      console.error('Error expanding short URL:', error);
+      throw new Error('Failed to expand URL');
+    }
+  }
+  
+  function convertGoogleMapUrl(fullUrl) {
+    const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+    const match = fullUrl.match(regex);
+  
+    if (match) {
+      const lat = match[1];
+      const lng = match[2];
+      return `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
+    } else {
+      throw new Error('Invalid Google Maps URL format.');
+    }
+  }
+  
+  const createPost = async (req, res) => {
+    console.log('Request body:', req.body);
+  
     if (!req.body.title || !req.body.description) {
-        return res.status(400).json({ message: 'Title or Description cannot be blank' })
+      return res.status(400).json({ message: 'Title or Description cannot be blank' });
     }
-
-    if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(req.body.map)){
-        return res.status(400).json({message: "Please provide a valid map link"})
+  
+    if (!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(req.body.map)) {
+      return res.status(400).json({ message: "Please provide a valid map link" });
     }
-
+  
+    let embedUrl = req.body.map;
+  
+    if (/^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(req.body.map)) {
+      console.log('Expanding short URL:', req.body.map);
+      embedUrl = await expandShortUrl(req.body.map);
+      console.log('Expanded URL:', embedUrl);
+    }
+  
+    if (/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]/.test(embedUrl)) {
+      console.log('Converting Google Maps URL to embed URL:', embedUrl);
+      embedUrl = convertGoogleMapUrl(embedUrl);
+      console.log('Converted Embed URL:', embedUrl);
+    }
+  
     const userID = req.user.id;
-
     const user = await User.findById(userID);
-
+  
     if (!user) {
-        return res.status(400).json({ message: "User doesn't exists." })
+      return res.status(400).json({ message: "User doesn't exist." });
     }
-
-
-    const post = await Post.create({
+  
+    let post;
+    try {
+      post = await Post.create({
         title: req.body.title,
         description: req.body.description,
         map: req.body.map,
+        mapEmbedUrl: embedUrl,
         userID,
         likes: 0,
-    })
-
-    if (post) {
-        return res.status(200).json({ message: 'Posted Successfully', post })
-    } else {
-        return res.status(400).json({ message: 'Cannot post at the moment' })
+      });
+      console.log('Post created:', post);
+    } catch (error) {
+      console.error('Error creating post:', error);
+      return res.status(500).json({ message: 'Cannot post at the moment' });
     }
-
-}
+  
+    if (post) {
+      return res.status(200).json({ message: 'Posted Successfully', post });
+    } else {
+      return res.status(400).json({ message: 'Cannot post at the moment' });
+    }
+  };
+  
 
 const editPost = async (req, res) => {
     const { title: newTitle, description: newDescription, map: newMap } = req.body
@@ -51,6 +98,18 @@ const editPost = async (req, res) => {
     if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(newMap)){
         return res.status(400).json({message: "Please provide a valid map link"})
     }
+
+    let embedUrl = newMap;
+    if(/^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(newMap)){
+        //do a http request to google server fetch the embedurl and save to the db.
+        embedUrl = await expandShortUrl(newMap);
+    }
+
+    if(!/^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]/.test(newMap)){
+        embedUrl = convertGoogleMapUrl(newMap);
+    }
+
+    
 
     var valid = mongoose.Types.ObjectId.isValid(id);
 
@@ -65,7 +124,10 @@ const editPost = async (req, res) => {
             return res.status(400).json({ message: 'No Post available to edit with that id' })
         }
         post = await Post.findByIdAndUpdate(req.params.id, {
-            ...req.body,
+            title: newTitle,
+            description: newDescription,
+            map: newMap,
+            mapEmbedUrl: embedUrl,
             updatedAt: Date.now()
         }, { new: true })
         res.status(200).json({ message: 'Post Updated Successfully', post })
