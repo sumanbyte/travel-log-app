@@ -26,7 +26,7 @@ nav {
   align-items: center;
 }
 
-.img-banner{
+.img-banner {
   padding-top: 50px;
 }
 
@@ -79,33 +79,33 @@ nav {
   font-size: 1.25rem !important; /* Default font-size */
 }
 
-.hero-text-mobile{
+.hero-text-mobile {
   display: none;
 }
-.hero-text{
+.hero-text {
   display: block;
 }
 
-.mode-btn{
+.mode-btn {
   margin-left: 50px;
   cursor: pointer;
 }
 
-.dark-mode{
+.dark-mode {
   background-color: rgb(33 37 41) !important;
   color: white !important;
 }
 
-.non-active-light{
+.non-active-light {
   color: rgb(197, 197, 187) !important;
 }
 
-.non-active-dark{
+.non-active-dark {
   color: rgb(130, 124, 124) !important;
 }
 
-.dark-mode-transition{
-  transition: all .55s ease-in-out;
+.dark-mode-transition {
+  transition: all 0.55s ease-in-out;
 }
 
 .single-comment span {
@@ -116,40 +116,38 @@ nav {
   font-size: 15px;
 }
 
-
 .comments-div {
   padding: 1.5rem !important;
 }
 
-.custom-comment-img{
+.custom-comment-img {
   margin-right: 10px;
 }
 
-
-.postcard-component{
+.postcard-component {
   border-radius: 20px;
 }
-.postcard-component .card-title{
+.postcard-component .card-title {
   font-size: 35px !important;
 }
 
-.postcard-component .postcard-actions svg{
+.postcard-component .postcard-actions svg {
   font-size: 20px;
 }
 
-.postcard-component .postcard-actions-list p{
+.postcard-component .postcard-actions-list p {
   font-size: 15px;
   padding: 3px 10px;
   margin: 0;
-  transition: .3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
 }
 
-.postcard-component .postcard-actions-list p:hover{
+.postcard-component .postcard-actions-list p:hover {
   background-color: rgb(211, 211, 247);
   cursor: pointer;
 }
 
-.postcard-component .postcard-actions-list{
+.postcard-component .postcard-actions-list {
   height: 60px;
   width: 80px;
   position: absolute;
@@ -159,20 +157,36 @@ nav {
   border-radius: 4px;
 }
 
-.card-title.h5{
+.card-title.h5 {
   font-size: 16px;
 }
 
-.posted-on{
+.posted-on {
   font-size: 12px;
 }
 
-.googleMap{
+.googleMap {
   width: 600px !important;
   height: 400px !important;
 }
 
-.text-justify{
+.post-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 16px;
+}
+
+.comment-h2 {
+  
+  font-size: 25px;
+}
+
+.comments-div p {
+  font-size: 13px !important;
+ }
+
+.text-justify {
   text-align: justify;
 }
 
@@ -197,23 +211,31 @@ nav {
   .banner-content-wrapper {
     display: block;
   }
-  
+
   .margin-top-all {
     margin-top: 50px;
   }
 
-  .mode-btn{
+  .mode-btn {
     margin-left: 0px;
     margin-top: 15px;
   }
 
- 
-  .postcard-component .card-title{
+  .postcard-component .card-title {
     font-size: 25px !important;
   }
 
-  .postcard-component .postcard-actions svg{
+  .postcard-component .postcard-actions svg {
     font-size: 15px;
+  }
+
+  .googleMap {
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  .post-container {
+    flex-direction: column;
   }
 }
 
@@ -251,18 +273,21 @@ nav {
   .single-comment span {
     font-size: 11px;
   }
-  
+
   .single-comment p {
     font-size: 13px;
   }
 
-  .comments-div{
-    padding: 1rem .5rem !important;
+  .comments-div {
+    padding: 1rem 0.5rem !important;
   }
-  .custom-comment-img{
+
+  
+
+  .custom-comment-img {
     margin: 0 2px;
   }
-  .card-title.h5{
+  .card-title.h5 {
     font-size: 13px;
   }
 }
@@ -276,19 +301,25 @@ nav {
   .banner-left-text {
     font-size: 14px;
   }
-  .hero-text-mobile{
+  .hero-text-mobile {
     display: block;
   }
-  .hero-text{
+  .hero-text {
     display: none;
   }
   .banner-text-heading {
     font-size: 40px;
   }
+
+  .googleMap {
+    height: 200px !important;
+  }
+  .post-container {
+    font-size: 15px;
+  }
 }
 
 @media screen and (max-width: 320px) {
- 
   .banner-left-text {
     font-size: 13px;
   }

@@ -94,16 +94,16 @@ const PostPage = () => {
   return (
     <div className={`${darkMode ? "dark-mode" : ""} dark-mode-transition`} style={{ minHeight: "100vh" }}>
       <div className="pt-5 container font-open">
-        <div className="py-5">
+        <div className="">
           {post ? (
             <>
 
-              <div className="d-flex gap-4 justify-content-between">
+              <div className="post-container">
 
                 <div>
 
                   <h1 className="display-6 fw-bold font-owsald">{post.title}</h1>
-                  <p className="col-md-12 fs-5 text-justify">{post.description}</p>
+                  <p className="col-md-12 text-justify">{post.description}</p>
 
                   <div className="d-flex flex-wrap justify-content-between align-items-center">
                     <p>
@@ -136,7 +136,7 @@ const PostPage = () => {
                 </p>
               )} */}
 
-              <h2 className="display-7 fw-bold mt-5 font-owsald">Leave a comment</h2>
+              <h2 className="comment-h2 fw-bold mt-5 font-owsald">Leave a comment</h2>
               {localStorage.getItem('auth-token') ? (
                 <div className="mb-3">
                   <textarea
@@ -156,7 +156,7 @@ const PostPage = () => {
               ) : (
                 <h5>You need to be logged in to comment the post or like</h5>
               )}
-              <div className="container px-0 my-5 py-5">
+              <div className="container px-0 py-5">
                 <div className="col-md-12">
                   <div className="col-md-12">
                     <div className="card text-dark">
@@ -166,7 +166,7 @@ const PostPage = () => {
                         {!allComments ? (
                           <Loading />
                         ) : allComments.length === 0 ? (
-                          <h1>No comments found for this post.</h1>
+                          <h6>No comments found for this post.</h6>
                         ) : (
                           allComments.map((comment) => (
                             <div key={comment._id} className='single-comment'>
