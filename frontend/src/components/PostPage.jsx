@@ -19,7 +19,7 @@ const PostPage = () => {
   const decodedJWT = localStorage.getItem('auth-token') ? jwtDecode(localStorage.getItem('auth-token')) : null;
   const { darkMode } = useMode();
 
-  
+
 
   const fetchPost = useCallback(async () => {
     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getpost/${postID}`);
@@ -98,35 +98,43 @@ const PostPage = () => {
           {post ? (
             <>
 
+              <div className="d-flex gap-4 justify-content-between">
 
-              <div className="d-flex flex-wrap justify-content-between align-items-center">
-                <p>
-                  Author: {post.userID.name}
-                </p>
-                <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes()} </p>
+                <div>
+
+                  <h1 className="display-6 fw-bold font-owsald">{post.title}</h1>
+                  <p className="col-md-12 fs-5 text-justify">{post.description}</p>
+
+                  <div className="d-flex flex-wrap justify-content-between align-items-center">
+                    <p>
+                      User: {post.userID.name}
+                    </p>
+                    {/* <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes()} </p> */}
+                  </div>
+
+                  <button className="btn btn-primary btn-sm" onClick={handleLikePost}>
+                    <span>{post.likes.length - 1} </span>Like
+                  </button>
+                </div>
+
+                <div style={{ maxWidth: "700px" }}>
+                  <iframe
+                    className='googleMap'
+                    style={{ border: "0" }}
+                    src={post.mapEmbedUrl}
+                    allowFullScreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+
               </div>
-              <h1 className="display-6 fw-bold font-owsald">{post.title}</h1>
-              <p className="col-md-12 fs-5">{post.description}</p>
 
-              <div style={{ width: "100%" }}>
-                <iframe
-                  width="100%"
-                  height="600"
-                  style={{ border: "0" }}
-                  src={post.mapEmbedUrl}
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
 
-              <button className="btn btn-primary btn-sm" onClick={handleLikePost}>
-                <span>{post.likes.length - 1} </span>Like
-              </button>
-              {post.createdAt !== post.updatedAt && (
+              {/* {post.createdAt !== post.updatedAt && (
                 <p className="posted-on text-end">
                   Edited: {new Date(post.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.updatedAt).getHours()}:{new Date(post.updatedAt).getMinutes()}
                 </p>
-              )}
+              )} */}
 
               <h2 className="display-7 fw-bold mt-5 font-owsald">Leave a comment</h2>
               {localStorage.getItem('auth-token') ? (
