@@ -151,7 +151,7 @@ const editPost = async (req, res) => {
             mapEmbedUrl: embedUrl,
             updatedAt: Date.now()
         }, { new: true })
-        res.status(200).json({ message: 'Post Updated Successfully', post })
+        res.status(200).json({ message: 'Post Updated Successfully', post, success: true })
     } else {
         return res.status(401).json({ message: "Not a valid id" })
     }
@@ -198,7 +198,7 @@ const deletePost = async (req, res) => {
         await session.commitTransaction();
         session.endSession();
 
-        return res.json({ message: 'Your Post has been deleted', toBeDeleted })
+        return res.json({ message: 'Your Post has been deleted', toBeDeleted, success: true })
 
     } catch (error) {
         // Abort the transaction only if an error occurs before committing

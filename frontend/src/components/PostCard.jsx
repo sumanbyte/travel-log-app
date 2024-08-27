@@ -25,24 +25,14 @@ const PostCard = ({ data }) => {
 
   const editHandleClick = useCallback(() => {
     editPost(postState._id, postState.title, postState.description, postState.map);
-    setShow(true);
-    setAlert({
-      color: 'success',
-      type: 'Success',
-      message: 'Post edited successfully',
-    });
+    
     setEditClicked(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editPost, postState, setShow, setAlert]);
 
   const handleDeleteClick = useCallback(() => {
     deletePost(data._id);
-    setShow(true);
-    setAlert({
-      color: 'danger',
-      type: 'Success',
-      message: 'Post Deleted successfully',
-    });
+    
     setShowActions(false)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data._id, deletePost, setShow, setAlert]);

@@ -172,7 +172,7 @@ nav {
 
 .post-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 25px;
   font-size: 16px;
 }

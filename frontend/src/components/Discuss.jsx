@@ -13,6 +13,7 @@ export const Discuss = () => {
 
   const isValidMapLink = /^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(userData.map);
 
+  console.log(isValidMapLink);
   
 
   useEffect(() => {
@@ -119,7 +120,7 @@ export const Discuss = () => {
           }
 
           <button
-            disabled={userData.title.length <= 3 || userData.description.length <= 3 && isValidMapLink }
+            disabled={userData.title.length <= 3 || userData.description.length <= 3 || !isValidMapLink }
             className="btn btn-primary btn-responsive mt-2 text-right"
             onClick={handleClick}
           >
