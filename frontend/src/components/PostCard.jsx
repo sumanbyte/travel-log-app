@@ -8,10 +8,13 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 const PostCard = ({ data }) => {
   const { darkMode } = useMode();
+  const {userPosts} = usePost();
   const postCardRef = useRef(null);
   const [showActions, setShowActions] = useState(false);
   const { setShow, setAlert } = useAlert();
   const [editClicked, setEditClicked] = useState(false);
+  
+
   const [postState, setPostState] = useState({
     _id: data._id,
     title: data.title,
@@ -23,8 +26,12 @@ const PostCard = ({ data }) => {
 
   const { editPost, deletePost } = usePost();
 
-  const editHandleClick = useCallback(() => {
-    editPost(postState._id, postState.title, postState.description, postState.map);
+  const editHandleClick = useCallback(async() => {
+    const response = await editPost(postState._id, postState.title, postState.description, postState.map) || false;
+    if(response && userPosts){
+      const dataIndex = userPosts?.findIndex(userPost => userPost._id === postState._id);
+      userPosts[dataIndex] = response.post;
+    }
     
     setEditClicked(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -6,10 +6,11 @@ import ToastContainer from 'react-bootstrap/ToastContainer'
 import useAlert from '../hooks/useAlert';
 function Alert() {
   const {show, setShow, alert} = useAlert();
+
   return (
     <Row>
       <Col xs={6}>
-        <ToastContainer position="bottom-end">
+        <ToastContainer className='position-fixed' position="bottom-end">
           <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide bg={alert.color}>
             <Toast.Header>
               <img

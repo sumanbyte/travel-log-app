@@ -89,6 +89,8 @@ const PostState = (props) => {
                 type: 'Success',
                 message: 'Post edited successfully',
             });
+            console.log(data.post)
+            return data;
         } else {
             setShow(true);
             setAlert({
@@ -96,8 +98,8 @@ const PostState = (props) => {
                 type: 'Success',
                 message: 'Some error occured while edit',
             });
+            return false;
         }
-        getAllPost()
 
     }
 
