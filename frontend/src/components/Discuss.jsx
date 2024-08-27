@@ -56,14 +56,8 @@ export const Discuss = () => {
 
   const handleClick = useCallback(() => {
     createPost(userData);
-    setUserData({ title: '', description: '' });
-    setShow(true);
-    setAlert({
-      color: 'success',
-      type: 'Success',
-      message: 'Post Created successfully',
-    });
-  }, [createPost, setShow, setAlert, userData]);
+    setUserData({ title: '', description: '', map: '' });
+  }, [createPost, userData]);
   // console.log(userPosts);
   console.log("i am running from discuss component")
   return (

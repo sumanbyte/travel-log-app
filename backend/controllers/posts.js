@@ -90,7 +90,7 @@ async function expandShortUrl(shortUrl) {
     }
   
     if (post) {
-      return res.status(200).json({ message: 'Posted Successfully', post });
+      return res.status(200).json({ message: 'Posted Successfully', post, success: true });
     } else {
       return res.status(400).json({ message: 'Cannot post at the moment' });
     }
@@ -158,9 +158,11 @@ const editPost = async (req, res) => {
 
 
 }
+
 const deletePost = async (req, res) => {
-    const { id } = req.params
-    const isValidID = mongoose.Types.ObjectId.isValid(id)
+    const { id } = req.params;
+    const isValidID = mongoose.Types.ObjectId.isValid(id);
+
     if (!isValidID) {
         return res.status(400).json({ message: 'Invalid ID' });
     }
@@ -168,48 +170,52 @@ const deletePost = async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
-
     try {
         const post = await Post.findById(id).session(session);
 
         if (!post) {
-            await session.abortTransaction();
-            session.endSession();
-            return res.status(404).json({ message: "Post not found" })
+            throw new Error("Post not found");
         }
-
 
         if (post.userID.toString() !== req.user.id) {
-            await session.abortTransaction();
-            session.endSession();
-            return res.status(401).json({ message: "Not Allowed" });
+            throw new Error("Not Allowed");
         }
 
-
+        // Find comments associated with the post
         const comments = await Comment.find({ postID: id }).session(session);
+        console.log('Comments found:', comments.length);  // Debugging info
+
         const commentIds = comments.map(comment => comment._id);
+        console.log('Comment IDs:', commentIds);  // Debugging info
 
+        // Delete associated comments
         await Comment.deleteMany({ postID: id }).session(session);
+        console.log('Comments deleted');  // Debugging info
 
+        // Delete associated replies
         await Reply.deleteMany({ commentId: { $in: commentIds } }).session(session);
+        console.log('Replies deleted');  // Debugging info
 
+        // Delete the post itself
         await Post.deleteOne({ _id: id }).session(session);
+        console.log('Post deleted');  // Debugging info
 
         await session.commitTransaction();
         session.endSession();
 
-        return res.json({ message: 'Your Post has been deleted', toBeDeleted, success: true })
+        return res.json({ message: 'Your Post has been deleted', success: true });
 
     } catch (error) {
-        // Abort the transaction only if an error occurs before committing
+        console.error('Error during deletion process:', error.message);  // Debugging info
         if (session.inTransaction()) {
             await session.abortTransaction();
         }
         session.endSession();
-        return res.status(500).json({ message: 'An error occurred during the deletion process', error });
+        return res.status(500).json({ message: 'An error occurred during the deletion process', error: error.message });
     }
+};
 
-}
+
 const getPost = async (req, res) => {
     const id = req.params.id
     const isValidID = mongoose.Types.ObjectId.isValid(id)

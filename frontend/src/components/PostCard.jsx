@@ -98,7 +98,7 @@ const PostCard = ({ data }) => {
             <>
               <div className='d-flex postcard-actions justify-content-between align-items-center my-0 mb-3'>
                 <p className='posted-on my-0'>
-                  {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes()}
+                  {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes().toString().padStart(2, "0")}
                 </p>
                 <BsThreeDotsVertical cursor={"pointer"} onClick={() => setShowActions(!showActions)} />
               </div>
@@ -107,7 +107,7 @@ const PostCard = ({ data }) => {
 
               {data.createdAt !== data.updatedAt && (
                 <p className="posted-on my-0 mt-2 text-end">
-                  Edited on {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes()}
+                  Edited on {new Date(data.updatedAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(data.updatedAt).getHours()}:{new Date(data.updatedAt).getMinutes().toString().padStart(2, "0")}
                 </p>
               )}
             </>

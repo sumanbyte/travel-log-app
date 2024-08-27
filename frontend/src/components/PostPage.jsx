@@ -109,7 +109,7 @@ const PostPage = () => {
                     <p>
                       User: {post.userID.name}
                     </p>
-                    {/* <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes()} </p> */}
+                    {/* <p>{new Date(post.createdAt).toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" })} at {new Date(post.createdAt).getHours()}:{new Date(post.createdAt).getMinutes().toString().padStart(2, "0")} </p> */}
                   </div>
 
                   <button className="btn btn-primary btn-sm" onClick={handleLikePost}>

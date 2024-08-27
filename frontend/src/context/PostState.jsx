@@ -47,12 +47,28 @@ const PostState = (props) => {
                 'auth-token': localStorage.getItem('auth-token')
             },
             body: JSON.stringify({ title, description, map })
-        })
+        });
 
-        console.log(await response.json())
+        const data = await response.json();
+        const success = data.success || false;
 
+        if (success) {
+            setShow(true);
+            setAlert({
+                color: 'success',
+                type: 'Success',
+                message: 'Post Created successfully',
+            });
+            getAllPost()
+        } else {
+            setShow(true);
+            setAlert({
+                color: 'success',
+                type: 'Success',
+                message: 'Some error occured while posting.',
+            });
+        }
         setLoading(false)
-        getAllPost()
     }
 
     const editPost = async (id, title, description, map) => {
@@ -73,7 +89,7 @@ const PostState = (props) => {
                 type: 'Success',
                 message: 'Post edited successfully',
             });
-        }else{
+        } else {
             setShow(true);
             setAlert({
                 color: 'success',
@@ -96,7 +112,7 @@ const PostState = (props) => {
 
         const data = await response.json();
         const success = data.success || false;
-        
+        console.log(success)
         if (success) {
             setShow(true);
             setAlert({
@@ -104,7 +120,7 @@ const PostState = (props) => {
                 type: 'Success',
                 message: 'Post Deleted successfully',
             });
-        }else{
+        } else {
             setShow(true);
             setAlert({
                 color: 'danger',
