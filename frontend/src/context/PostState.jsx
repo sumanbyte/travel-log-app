@@ -111,12 +111,27 @@ const PostState = (props) => {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('auth-token')
             },
-        })
+        });
 
         const data = await response.json();
         const success = data.success || false;
-        console.log(success)
+        // console.log(success)
+        // console.log(allPosts, userPosts)
+        // const mid = '66d4920e2197870052e364cc';
+        // const allAllPosts = allPosts.filter(post => post._id !== mid);
+        // const allUserPostsd = userPosts.filter(post => post._id !== mid);
+
+        // console.log(allAllPosts, allUserPostsd)
+
+   
+
+        
         if (success) {
+            let newAllPosts = allPosts.filter(post => post._id !== id);
+            let newUserPosts = userPosts.filter(post => post._id !== id);
+            setAllPosts(newAllPosts);
+            setUserPosts(newUserPosts);
+
             setShow(true);
             setAlert({
                 color: 'danger',

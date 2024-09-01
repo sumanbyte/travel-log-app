@@ -203,7 +203,7 @@ const deletePost = async (req, res) => {
         await session.commitTransaction();
         session.endSession();
 
-        return res.json({ message: 'Your Post has been deleted', success: true });
+        return res.json({ message: 'Your Post has been deleted', success: true, post });
 
     } catch (error) {
         console.error('Error during deletion process:', error.message);  // Debugging info
