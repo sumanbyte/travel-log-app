@@ -1,6 +1,6 @@
 import useAlert from "../hooks/useAlert";
 import PostContext from "./postContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const PostState = (props) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -53,6 +53,7 @@ const PostState = (props) => {
         const success = data.success || false;
 
         if (success) {
+            setAllPosts([...allPosts, data.post]);
             setShow(true);
             setAlert({
                 color: 'success',
@@ -131,14 +132,12 @@ const PostState = (props) => {
             });
         }
 
-        console.log(data);
-        getAllPost()
+        // getAllPost()
 
     }
 
     const allUserPosts = async () => {
         try {
-
             setLoading(true);
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/allposts`, {
                 method: 'GET',
@@ -156,9 +155,14 @@ const PostState = (props) => {
     }
 
 
+    useEffect(()=> {
+        getAllPost();
+        allUserPosts();
+    }, [])
+
 
     return (
-        <PostContext.Provider value={{ individualPost, getPost, allUserPosts, allPosts, userPosts, loading, createPost, getAllPost, editPost, deletePost, error }}>
+        <PostContext.Provider value={{ individualPost, getPost, allUserPosts, allPosts, setAllPosts, userPosts, loading, createPost, getAllPost, editPost, deletePost, error }}>
             {props.children}
         </PostContext.Provider>
 

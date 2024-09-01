@@ -239,6 +239,10 @@ nav {
   }
 }
 
+.post-card{
+  transition: all 1s ease-in !important;
+}
+
 /* Small screen adjustments */
 @media screen and (max-width: 768px) {
   .login-signup-img {

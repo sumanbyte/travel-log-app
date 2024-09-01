@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Loading from '../assets/loading-component/Loading';
 import PostCard from './PostCard';
 import usePost from '../hooks/usePost';
@@ -8,18 +8,13 @@ import useMode from '../hooks/useMode';
 export const Discuss = () => {
   const { setShow, setAlert } = useAlert();
   const [userData, setUserData] = useState({ title: '', description: '', map: "" });
-  const { getAllPost, userPosts, loading, error, createPost } = usePost();
+  const { userPosts, loading, error, createPost } = usePost();
   const { darkMode } = useMode();
 
   const isValidMapLink = /^https:\/\/(www\.)?google\.(com|[a-z]{2})\/maps\/place\/[^\s]+|^https:\/\/maps\.app\.goo\.gl\/[^\s]+$/.test(userData.map);
 
   console.log(isValidMapLink);
   
-
-  useEffect(() => {
-    getAllPost();
-    // eslint-disable-next-line
-  }, []);
 
   const handleChange = useCallback((e) => {
     setUserData((prevData) => ({
@@ -34,13 +29,7 @@ export const Discuss = () => {
         e.preventDefault();
         if (userData.title.length > 3 && userData.description.length > 3) {
           createPost(userData);
-          setShow(true);
-          setAlert({
-            color: 'success',
-            type: 'Success',
-            message: 'Post Created successfully',
-          });
-          setUserData({ title: '', description: '' });
+          setUserData({ title: '', description: '', map: "" });
         } else {
           setShow(true);
           setAlert({
@@ -132,7 +121,7 @@ export const Discuss = () => {
             userPosts && userPosts.length <= 0 ? (
               "You don't have any posts."
             ) : (
-              userPosts && userPosts.map((data) => <PostCard key={data._id} data={data} />)
+              userPosts?.map((data) => <PostCard key={data._id} data={data} />)
             )}
         </div>
       </div>
