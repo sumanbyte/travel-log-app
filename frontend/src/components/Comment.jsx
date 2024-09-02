@@ -37,7 +37,6 @@ const Comment = ({ comment }) => {
 
 
     const fetchReplies = async (commentid) => {
-        // if (replies.length < 0) {
 
         try {
             setLoading(true);
@@ -57,7 +56,6 @@ const Comment = ({ comment }) => {
             setLoading(false);
             setToggle(!toggle); // Toggle visibility after fetching
         }
-        // }
     };
 
     console.log(comment)

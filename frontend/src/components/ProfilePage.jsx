@@ -9,7 +9,6 @@ function ProfilePage() {
 
   const { user, getUser, loading, error } = useAuthentication();
   const { darkMode } = useMode();
-  // console.log(user)
 
   useEffect(() => {
     getUser();
