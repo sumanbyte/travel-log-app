@@ -54,13 +54,14 @@ const PostState = (props) => {
 
         if (success) {
             setAllPosts([...allPosts, data.post]);
+            setUserPosts([...userPosts, data.post]);
             setShow(true);
             setAlert({
                 color: 'success',
                 type: 'Success',
                 message: 'Post Created successfully',
             });
-            getAllPost()
+            
         } else {
             setShow(true);
             setAlert({
@@ -70,6 +71,7 @@ const PostState = (props) => {
             });
         }
         setLoading(false)
+
     }
 
     const editPost = async (id, title, description, map) => {

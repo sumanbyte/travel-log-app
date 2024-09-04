@@ -172,6 +172,7 @@ const PostPage = () => {
                             <div key={comment._id} className='single-comment'>
                               <hr />
                               <Comment comment={comment} />
+                              <Loading />
                               <hr />
                             </div>
                           ))

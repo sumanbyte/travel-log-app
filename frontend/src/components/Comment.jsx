@@ -94,7 +94,7 @@ const Comment = ({ comment }) => {
                             />
                         </div>
                         {reply && (
-                            <div className="input-group input-group-sm mt-1 mb-3">
+                            <div className="input-group input-group-sm my-1">
                                 <input
                                     type="text"
                                     className="form-control"
@@ -121,7 +121,7 @@ const Comment = ({ comment }) => {
                                     setToggle(!toggle);
                                 }}
                             >
-                                Show Replies
+                                View all Replies
                             </Link> : <Link
                                 className="ml-5"
                                 style={{ fontSize: "12px", color: darkMode ? "white" : "black" }}
@@ -130,7 +130,7 @@ const Comment = ({ comment }) => {
                                     setToggle(!toggle);
                                 }}
                             >
-                                Hide Replies
+                               {!loading && "Hide Replies"}
                             </Link>
 
                         )}
