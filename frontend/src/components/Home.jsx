@@ -39,7 +39,7 @@ const Home = () => {
             <Link
               type="button"
               className="btn btn-primary btn-responsive"
-              to={'/login'}
+              to={`${localStorage.getItem("token") ? "/login": "#"}`}
             >
               Join Us
             </Link>
